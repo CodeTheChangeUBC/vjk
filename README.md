@@ -5,8 +5,8 @@ The project consists of two smaller sub projects. The first is to develop a data
 
 Roles 
 
-Project Lead 
-Developers 
+Project Lead, 
+Developers,
 Designers 
 
 Current Contributors
