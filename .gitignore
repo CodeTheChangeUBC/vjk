@@ -9,6 +9,8 @@ __pycache__/
 local_settings.py
 db.sqlite3
 media
+mysite/__pycache__/
+vjk/migrations/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
