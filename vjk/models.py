@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+
 class Student(models.Model):
 	first_name = models.CharField(max_length = 30)
 	last_name = models.CharField(max_length = 30)
@@ -8,3 +9,6 @@ class Student(models.Model):
 	location = models.CharField(max_length = 100)
 	school = models.CharField(max_length = 50)
 	year_attended = models.IntegerField()
+	reference_fname = models.CharField(max_length=30,default="")
+	reference_lname = models.CharField(max_length=30,default="")
+	reference_email = models.EmailField(default="")
