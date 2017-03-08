@@ -16,3 +16,6 @@ To test, cd into the vjk repo and through the command line, enter:
 python manage.py runserver
 ```
 then through your web browser, go to http://127.0.0.1:8000 (or localhost:8000) and you should see a default Django page saying "congrats, it worked!"
+
+### Connect to the database through command line
+Run "mysql -h vjk-test.c9vzvqoxblsh.us-west-2.rds.amazonaws.com -u ctc_vjk -p". This will create a prompt where you type in the password, which is in your mysite/settings.py file under the database section. If successful, you will be in the MySQL client and then you can type "use VJK" and then "show tables;"
