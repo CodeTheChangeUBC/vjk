@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'vjk.apps.VjkConfig',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -76,8 +77,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'VJK',
-        'HOST': 'vjk.c9vzvqoxblsh.us-west-2.rds.amazonaws.com',
+        'NAME': 'vjk_test',
+        'HOST': 'vjk-test.c9vzvqoxblsh.us-west-2.rds.amazonaws.com',
         'PORT':'3306',
         'USER':'ctc_vjk',
         'PASSWORD': 'codethechange'
