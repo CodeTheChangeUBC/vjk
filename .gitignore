@@ -5,10 +5,12 @@
 *.log
 *.pot
 *.pyc
-__pycache__/
+vjk/migrations/*
 local_settings.py
 db.sqlite3
 media
+mysite/__pycache__/
+vjk/migrations/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
