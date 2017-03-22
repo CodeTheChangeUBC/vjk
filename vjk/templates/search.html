@@ -1,0 +1,90 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- jQuery import -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function(){
+      $("#submit").submit(function(){
+        var tbl = $("#table").val();
+        var inpt = $("#input").val();
+        var fild = $("#field").val();
+        console.log(tbl+" "+inpt+" "+fild);
+      })
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container-fluid">
+
+    <h1>Search Page</h1>
+    <form>
+    <h3>For
+      <select id="table">
+        <option value="contacts">Contacts</option>
+        <option value="donors">Donors</option>
+        <option value="sponsors">Sponsors</option>
+        <option value="students">Students</option>
+        <option value="volunteers">Volunteers</option>
+      </select>
+    </h3>
+    <input id="input" type="text" placeholder="Search">
+    <select id="field">
+      <option value="contacts">Contacts</option>
+      <option value="donors">Donors</option>
+      <option value="sponsors">Sponsors</option>
+      <option value="students">Students</option>
+      <option value="volunteers">Volunteers</option>
+    </select>
+    <button id="submit" class="btn searchbutton" type="submit"><i class="fa fa-search"></i></button>
+  </form>
+
+  {% if latest_sponsor_list %}
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Service Provided</th>
+          <th>Personal Contact</th>
+          <th>Secondary Contact</th>
+        </tr>
+      {% for sponsor in latest_sponsor_list %}
+        <tr>
+          <td>{{sponsor.id}}</td>
+          <td>{{sponsor.name}}</td>
+          <td>{{sponsor.service_provided}}</td>
+          <td>{{sponsor.personal_contact}}</td>
+          <td>{{sponsor.sec_contact}}</td>
+        </tr>
+      {% endfor %}
+      </table>
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Year Donated</th>
+          <th>Amount donated</th>
+          <th>Primary Contact</th>
+          <th>Secondary Contact</th>
+        </tr>
+        {% for donor in latest_donor_list %}
+          <tr>
+            <td>{{donor.id}}</td>
+            <td>{{donor.org_name}}</td>
+            <td>{{donor.location}}</td>
+            <td>{{donor.year_donation}}</td>
+            <td>{{donor.amount_donation}}</td>
+            <td>{{donor.contact_ID1}}</td>
+            <td>{{donor.contact_ID2}}</td>
+          </tr>
+        {% endfor %}
+      </table>
+  {% else %}
+      <p>No polls are available.</p>
+  {% endif %}
+</div>
+</body>
+</html>
