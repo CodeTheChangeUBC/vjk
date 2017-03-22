@@ -44,6 +44,7 @@
   {% if latest_sponsor_list %}
       <table class="table">
         <tr>
+          <th>Delete?</th>
           <th>ID</th>
           <th>Name</th>
           <th>Service Provided</th>
@@ -52,6 +53,7 @@
         </tr>
       {% for sponsor in latest_sponsor_list %}
         <tr>
+          <td><input type="checkbox" name="{{sponsor.name}}" value="{{sponsor.id}}"></td>
           <td>{{sponsor.id}}</td>
           <td>{{sponsor.name}}</td>
           <td>{{sponsor.service_provided}}</td>
@@ -60,6 +62,10 @@
         </tr>
       {% endfor %}
       </table>
+    {% else %}
+        <p>No data are available.</p>
+    {% endif %}
+    {% if latest_donor_list %}
       <table class="table">
         <tr>
           <th>ID</th>
@@ -83,7 +89,7 @@
         {% endfor %}
       </table>
   {% else %}
-      <p>No polls are available.</p>
+      <p>No data are available.</p>
   {% endif %}
 </div>
 </body>
