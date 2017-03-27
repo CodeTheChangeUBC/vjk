@@ -1,12 +1,13 @@
 <html>
 <head>
+  <title>Search Page</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- jQuery import -->
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script type='text/javascript' src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script>
     $(document).ready(function(){
-      $("#submit").submit(function(){
+      $("#submit").on("click", function(){
         var tbl = $("#table").val();
         var inpt = $("#input").val();
         var fild = $("#field").val();
@@ -38,59 +39,161 @@
       <option value="students">Students</option>
       <option value="volunteers">Volunteers</option>
     </select>
-    <button id="submit" class="btn searchbutton" type="submit"><i class="fa fa-search"></i></button>
+    <button id="submit" class="btn searchbutton"><i class="fa fa-search"></i></button>
   </form>
-
-  {% if latest_sponsor_list %}
-      <table class="table">
-        <tr>
-          <th>Delete?</th>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Service Provided</th>
-          <th>Personal Contact</th>
-          <th>Secondary Contact</th>
-        </tr>
-      {% for sponsor in latest_sponsor_list %}
-        <tr>
-          <td><input type="checkbox" name="{{sponsor.name}}" value="{{sponsor.id}}"></td>
-          <td>{{sponsor.id}}</td>
-          <td>{{sponsor.name}}</td>
-          <td>{{sponsor.service_provided}}</td>
-          <td>{{sponsor.personal_contact}}</td>
-          <td>{{sponsor.sec_contact}}</td>
-        </tr>
-      {% endfor %}
-      </table>
-    {% else %}
-        <p>No data are available.</p>
-    {% endif %}
-    {% if latest_donor_list %}
-      <table class="table">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Year Donated</th>
-          <th>Amount donated</th>
-          <th>Primary Contact</th>
-          <th>Secondary Contact</th>
-        </tr>
-        {% for donor in latest_donor_list %}
+  <hr>
+  <div class="contacts">
+    <h3>Contacts</h3>
+      {% if contacts_list %}
+        <table class="table">
           <tr>
-            <td>{{donor.id}}</td>
-            <td>{{donor.org_name}}</td>
-            <td>{{donor.location}}</td>
-            <td>{{donor.year_donation}}</td>
-            <td>{{donor.amount_donation}}</td>
-            <td>{{donor.contact_ID1}}</td>
-            <td>{{donor.contact_ID2}}</td>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Donor</th>
+            <th>Sponsor</th>
+            <th>Student</th>
+            <th>Volunteer</th>
           </tr>
-        {% endfor %}
-      </table>
-  {% else %}
-      <p>No data are available.</p>
-  {% endif %}
+          {% for contact in contacts_list %}
+            <tr>
+              <td id="{{contact.id}}">{{contact.id}}</td>
+              <td>{{contact.first_name}}</td>
+              <td>{{contact.last_name}}</td>
+              <td>{{contact.email}}</td>
+              <td>{{contact.phone}}</td>
+              <td>{{contact.donor}}</td>
+              <td>{{contact.sponsor}}</td>
+              <td>{{contact.student}}</td>
+              <td>{{contact.volunteer}}</td>
+            </tr>
+          {% endfor %}
+        </table>
+    {% else %}
+        <p>No Contact data are available.</p>
+    {% endif %}
+  </div>
+  <hr>
+  <div class="donors">
+    <h3>Donors</h3>
+      {% if donors_list %}
+        <table class="table">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Year Donated</th>
+            <th>Amount donated</th>
+            <th>Primary Contact</th>
+            <th>Secondary Contact</th>
+          </tr>
+          {% for donor in donors_list %}
+            <tr>
+              <td>{{donor.id}}</td>
+              <td>{{donor.org_name}}</td>
+              <td>{{donor.location}}</td>
+              <td>{{donor.year_donation}}</td>
+              <td>{{donor.amount_donation}}</td>
+              <td>{{donor.primary_contact_id}}</td>
+              <td>{{donor.secondary_contact_id}}</td>
+            </tr>
+          {% endfor %}
+        </table>
+    {% else %}
+        <p>No Donor data are available.</p>
+    {% endif %}
+  </div>
+  <hr>
+  <!-- Change in DB? -->
+  <!-- <div class="sponsors">
+      <h3>Sponsors</h3>
+      {% if sponsors_list %}
+        <table class="table">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Service Provided</th>
+          </tr>
+          {% for sponsor in sponsors_list %}
+            <tr>
+              <td>{{sponsor.id}}</td>
+              <td>{{sponsor.name}}</td>
+              <td>{{sponsor.service_provided}}</td>
+            </tr>
+          {% endfor %}
+        </table>
+    {% else %} -->
+        <p>No Sponsor data are available. Issue with DB</p>
+    <!-- {% endif %}
+  </div> -->
+    <hr>
+    <div class="students">
+      <h3>Students</h3>
+        {% if students_list %}
+          <table class="table">
+            <tr>
+              <th>ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Location</th>
+              <th>School</th>
+              <th>Year Attended</th>
+              <th>Ref. First Name</th>
+              <th>Ref. Last Name</th>
+              <th>Ref. Email</th>
+            </tr>
+            {% for student in students_list %}
+              <tr>
+                <td>{{student.id}}</td>
+                <td>{{student.first_name}}</td>
+                <td>{{student.last_name}}</td>
+                <td>{{student.email}}</td>
+                <td>{{student.location}}</td>
+                <td>{{student.school}}</td>
+                <td>{{student.year_attended}}</td>
+                <td>{{student.reference_fname}}</td>
+                <td>{{student.reference_lname}}</td>
+                <td>{{student.reference_email}}</td>
+              </tr>
+            {% endfor %}
+          </table>
+      {% else %}
+          <p>No Student data are available.</p>
+      {% endif %}
+    </div>
+    <hr>
+    <div class="Volunteers">
+      <h3>Volunteers</h3>
+        {% if volunteers_list %}
+          <table class="table">
+            <tr>
+              <th>ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Role</th>
+              <th>Years Helped</th>
+            </tr>
+            {% for volunteer in volunteers_list %}
+              <tr>
+                <td>{{vounteer.id}}</td>
+                <td>{{vounteer.first_name}}</td>
+                <td>{{vounteer.last_name}}</td>
+                <td>{{vounteer.email}}</td>
+                <td>{{vounteer.phone}}</td>
+                <td>{{vounteer.role}}</td>
+                <td>{{vounteer.years_helped}}</td>
+              </tr>
+            {% endfor %}
+          </table>
+      {% else %}
+          <p>No Volunteer data are available.</p>
+      {% endif %}
+    </div>
 </div>
 </body>
 </html>
