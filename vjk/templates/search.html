@@ -7,11 +7,69 @@
   <script type='text/javascript' src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script>
     $(document).ready(function(){
+      $("#table").change(function() {
+        var arr = [".contacts", ".donors", ".sponsors", ".students", ".volunteers"];
+        var tbl = "." + $("#table").val();
+        var options =
+        [{
+          "First Name": "first_name",
+          "Last Name": "last_name",
+          "Email":"email",
+          "Phone":"phone",
+          "Donor":"donor",
+          "Sponsor":"sponsor",
+          "Student":"student",
+          "Volunteer":"volunteer"
+        },
+        {
+          "Org Name":"org_name",
+          "Location":"location",
+          "Year donation":"year_donation",
+          "Amount Donated":"amount_donation",
+          "Primary Contact ID":"primary_contact_id",
+          "secondary Contact ID":"secondary_contact_id"
+        },
+        {
+          "Name": "name",
+          "Service Provided": "service_provided"
+        },
+        {
+          "First Name": "first_name",
+          "Last Name": "last_name",
+          "Email": "email",
+          "Location": "location",
+          "School": "year_attended",
+          "Ref. First Name": "reference_fname",
+          "Ref. Last Name": "reference_lname",
+          "Ref. Email": "reference_email"
+        },
+        {
+          "First Name": "first_name",
+          "Last Name": "last_name",
+          "Email": "email",
+          "Phone": "phone",
+          "Role": "role",
+          "Years Helped": "years_helped"
+        }];
+        for (var i = 0; i < arr.length; i++) {
+          if (tbl == arr[i]) {
+            $(arr[i]).show();
+            $("#field").empty();
+            var keys = Object.keys(options[i]);
+            var vals = Object.values(options[i]);
+            $.each(options, function(key,value) {
+            $("#field").append($("<option></option>")
+               .attr("value", vals[key]).text(keys[key]));
+             });
+          } else {
+            $(arr[i]).hide();
+          }
+        }
+
+      })
       $("#submit").on("click", function(){
-        var tbl = $("#table").val();
         var inpt = $("#input").val();
         var fild = $("#field").val();
-        console.log(tbl+" "+inpt+" "+fild);
       })
     });
   </script>
@@ -33,15 +91,12 @@
     </h3>
     <input id="input" type="text" placeholder="Search">
     <select id="field">
-      <option value="contacts">Contacts</option>
-      <option value="donors">Donors</option>
-      <option value="sponsors">Sponsors</option>
-      <option value="students">Students</option>
-      <option value="volunteers">Volunteers</option>
+      <option value="all">All</option>
     </select>
-    <button id="submit" class="btn searchbutton"><i class="fa fa-search"></i></button>
+    <input id="submit" type="button" class="btn searchbutton" value="Search"></input>
   </form>
   <hr>
+  <div class=".all">
   <div class="contacts">
     <h3>Contacts</h3>
       {% if contacts_list %}
@@ -74,9 +129,10 @@
     {% else %}
         <p>No Contact data are available.</p>
     {% endif %}
+    <hr>
   </div>
-  <hr>
-  <div class="donors">
+
+  <div class="donors" hidden>
     <h3>Donors</h3>
       {% if donors_list %}
         <table class="table">
@@ -104,10 +160,10 @@
     {% else %}
         <p>No Donor data are available.</p>
     {% endif %}
+    <hr>
   </div>
-  <hr>
   <!-- Change in DB? -->
-  <!-- <div class="sponsors">
+  <div class="sponsors" hidden>
       <h3>Sponsors</h3>
       {% if sponsors_list %}
         <table class="table">
@@ -124,12 +180,12 @@
             </tr>
           {% endfor %}
         </table>
-    {% else %} -->
+    {% else %}
         <p>No Sponsor data are available. Issue with DB</p>
-    <!-- {% endif %}
-  </div> -->
+    {% endif %}
     <hr>
-    <div class="students">
+  </div>
+    <div class="students" hidden>
       <h3>Students</h3>
         {% if students_list %}
           <table class="table">
@@ -163,9 +219,9 @@
       {% else %}
           <p>No Student data are available.</p>
       {% endif %}
+      <hr>
     </div>
-    <hr>
-    <div class="Volunteers">
+    <div class="Volunteers" hidden>
       <h3>Volunteers</h3>
         {% if volunteers_list %}
           <table class="table">
@@ -180,13 +236,13 @@
             </tr>
             {% for volunteer in volunteers_list %}
               <tr>
-                <td>{{vounteer.id}}</td>
-                <td>{{vounteer.first_name}}</td>
-                <td>{{vounteer.last_name}}</td>
-                <td>{{vounteer.email}}</td>
-                <td>{{vounteer.phone}}</td>
-                <td>{{vounteer.role}}</td>
-                <td>{{vounteer.years_helped}}</td>
+                <td>{{volunteer.id}}</td>
+                <td>{{volunteer.first_name}}</td>
+                <td>{{volunteer.last_name}}</td>
+                <td>{{volunteer.email}}</td>
+                <td>{{volunteer.phone}}</td>
+                <td>{{volunteer.role}}</td>
+                <td>{{volunteer.years_helped}}</td>
               </tr>
             {% endfor %}
           </table>
@@ -194,6 +250,7 @@
           <p>No Volunteer data are available.</p>
       {% endif %}
     </div>
+  </div>
 </div>
 </body>
 </html>
