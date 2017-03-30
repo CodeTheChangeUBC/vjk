@@ -11,17 +11,17 @@ class Contacts(models.Model):
 	student = models.BooleanField()
 	volunteer = models.BooleanField()
 
-class Sponsors(models.Model):
-	name = models.CharField(max_length = 30)
-	service_provided = models.CharField(max_length = 50)
-	primary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
-	secondary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
-
 class Donors(models.Model):
 	org_name = models.CharField(max_length = 50)
 	location = models.CharField(max_length = 100)
 	year_donation = models.IntegerField()
 	amount_donation = models.IntegerField()
+	primary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
+	secondary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
+
+class Sponsors(models.Model):
+	name = models.CharField(max_length = 50)
+	service_provided = models.CharField(max_length = 50)
 	primary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
 	secondary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
 
