@@ -12,7 +12,7 @@ from .models import Volunteers
 def search(request):
 	contacts_list = Contacts.objects.all()
 	donors_list = Donors.objects.all()
-	# sponsors_list = Sponsors.objects.all()
+	sponsors_list = Sponsors.objects.all()
 	students_list = Students.objects.all()
 	volunteers_list = Volunteers.objects.all()
 
@@ -20,7 +20,7 @@ def search(request):
     	context = {
 	        "contacts_list": contacts_list,
 			"donors_list": donors_list,
-			# "sponsors_list": sponsors_list,
+			"sponsors_list": sponsors_list,
 			"students_list": students_list,
 			"volunteers_list": volunteers_list
 	    }

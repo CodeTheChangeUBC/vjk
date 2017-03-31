@@ -5,74 +5,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- jQuery import -->
   <script type='text/javascript' src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script>
-    $(document).ready(function(){
-      $("#table").change(function() {
-        var arr = [".contacts", ".donors", ".sponsors", ".students", ".volunteers"];
-        var tbl = "." + $("#table").val();
-        var options =
-        [{
-          "First Name": "first_name",
-          "Last Name": "last_name",
-          "Email":"email",
-          "Phone":"phone",
-          "Donor":"donor",
-          "Sponsor":"sponsor",
-          "Student":"student",
-          "Volunteer":"volunteer"
-        },
-        {
-          "Org Name":"org_name",
-          "Location":"location",
-          "Year donation":"year_donation",
-          "Amount Donated":"amount_donation",
-          "Primary Contact ID":"primary_contact_id",
-          "secondary Contact ID":"secondary_contact_id"
-        },
-        {
-          "Name": "name",
-          "Service Provided": "service_provided"
-        },
-        {
-          "First Name": "first_name",
-          "Last Name": "last_name",
-          "Email": "email",
-          "Location": "location",
-          "School": "year_attended",
-          "Ref. First Name": "reference_fname",
-          "Ref. Last Name": "reference_lname",
-          "Ref. Email": "reference_email"
-        },
-        {
-          "First Name": "first_name",
-          "Last Name": "last_name",
-          "Email": "email",
-          "Phone": "phone",
-          "Role": "role",
-          "Years Helped": "years_helped"
-        }];
-        for (var i = 0; i < arr.length; i++) {
-          if (tbl == arr[i]) {
-            $(arr[i]).show();
-            $("#field").empty();
-            var keys = Object.keys(options[i]);
-            var vals = Object.values(options[i]);
-            $.each(options, function(key,value) {
-            $("#field").append($("<option></option>")
-               .attr("value", vals[key]).text(keys[key]));
-             });
-          } else {
-            $(arr[i]).hide();
-          }
-        }
-
-      })
-      $("#submit").on("click", function(){
-        var inpt = $("#input").val();
-        var fild = $("#field").val();
-      })
-    });
-  </script>
+  {% load static %}
+  <script type="text/javascript" src="{% static "search.js" %}"></script>
+  <script type="text/javascript" src="{% static "optionschange.js" %}"></script>
+  <script type="text/javascript" src="{% static "delete.js" %}"></script>
 </head>
 
 <body>
@@ -90,11 +26,17 @@
       </select>
     </h3>
     <input id="input" type="text" placeholder="Search">
-    <select id="field">
-      <option value="all">All</option>
-    </select>
+      <select id="field">
+        <option value="all">Anything</option>
+        <option value="first_name">First Name</option>
+        <option value="last_name">Last Name</option>
+        <option value="email">Email</option>
+        <option value="phone">Phone</option>
+        <option value="donor">Donor</option>
+      </select>
     <input id="submit" type="button" class="btn searchbutton" value="Search"></input>
   </form>
+  <button id="delete">DELETE</button>
   <hr>
   <div class=".all">
   <div class="contacts">
@@ -102,6 +44,7 @@
       {% if contacts_list %}
         <table class="table">
           <tr>
+            <th>Select</th>
             <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -114,6 +57,7 @@
           </tr>
           {% for contact in contacts_list %}
             <tr>
+              <td><input type="checkbox" name="deletebox" value=con{{contact.id}}></td>
               <td id="{{contact.id}}">{{contact.id}}</td>
               <td>{{contact.first_name}}</td>
               <td>{{contact.last_name}}</td>
@@ -137,6 +81,7 @@
       {% if donors_list %}
         <table class="table">
           <tr>
+            <th>Select</th>
             <th>ID</th>
             <th>Name</th>
             <th>Location</th>
@@ -147,6 +92,7 @@
           </tr>
           {% for donor in donors_list %}
             <tr>
+              <td><input type="checkbox" name="deletebox" value=don{{donor.id}}></td>
               <td>{{donor.id}}</td>
               <td>{{donor.org_name}}</td>
               <td>{{donor.location}}</td>
@@ -168,15 +114,21 @@
       {% if sponsors_list %}
         <table class="table">
           <tr>
+            <th>Select</th>
             <th>ID</th>
             <th>Name</th>
             <th>Service Provided</th>
+            <th>Primary Contact ID</th>
+            <th>Secondary Contact ID</th>
           </tr>
           {% for sponsor in sponsors_list %}
             <tr>
+              <td><input type="checkbox" name="deletebox" value=spo{{sponsor.id}}></td>
               <td>{{sponsor.id}}</td>
               <td>{{sponsor.name}}</td>
               <td>{{sponsor.service_provided}}</td>
+              <td>{{sponsor.primary_contact_id}}</td>
+              <td>{{sponsor.secondary_contact_id}}</td>
             </tr>
           {% endfor %}
         </table>
@@ -190,6 +142,7 @@
         {% if students_list %}
           <table class="table">
             <tr>
+              <th>Select</th>
               <th>ID</th>
               <th>First Name</th>
               <th>Last Name</th>
@@ -203,6 +156,7 @@
             </tr>
             {% for student in students_list %}
               <tr>
+                <td><input type="checkbox" name="deletebox" value=stu{{student.id}}></td>
                 <td>{{student.id}}</td>
                 <td>{{student.first_name}}</td>
                 <td>{{student.last_name}}</td>
@@ -226,6 +180,7 @@
         {% if volunteers_list %}
           <table class="table">
             <tr>
+              <th>Select</th>
               <th>ID</th>
               <th>First Name</th>
               <th>Last Name</th>
@@ -236,6 +191,7 @@
             </tr>
             {% for volunteer in volunteers_list %}
               <tr>
+                <td><input type="checkbox" name="deletebox" value=vol{{volunteer.id}}></td>
                 <td>{{volunteer.id}}</td>
                 <td>{{volunteer.first_name}}</td>
                 <td>{{volunteer.last_name}}</td>
