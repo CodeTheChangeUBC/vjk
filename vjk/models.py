@@ -20,7 +20,11 @@ class Donors(models.Model):
 	secondary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
 
 class Sponsors(models.Model):
+<<<<<<< HEAD
 	name = models.CharField(max_length = 30)
+=======
+	name = models.CharField(max_length = 50)
+>>>>>>> master
 	service_provided = models.CharField(max_length = 50)
 	primary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
 	secondary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
@@ -42,4 +46,8 @@ class Volunteers(models.Model):
 	email = models.EmailField()
 	phone = models.CharField(max_length  = 20)
 	role = models.CharField(max_length = 75)
+<<<<<<< HEAD
 	years_helped = models.CharField(max_length=75,default="")
+=======
+	years_helped = models.CharField(max_length=75,default="") 
+>>>>>>> master

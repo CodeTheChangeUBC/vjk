@@ -3,14 +3,14 @@
 
 ### Django ###
 *.log
-*.pot
-*.pyc
-vjk/migrations/*
 local_settings.py
 db.sqlite3
+*.egg-info
+*.pot
+*.py[co]
+.tox/
+__pycache__
 media
-mysite/__pycache__/
-vjk/migrations/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
