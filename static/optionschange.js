@@ -30,7 +30,8 @@ $(document).ready(function(){
       "Last Name": "last_name",
       "Email": "email",
       "Location": "location",
-      "School": "year_attended",
+      "School": "school",
+      "Year Attended": "year_attended",
       "Ref. First Name": "reference_fname",
       "Ref. Last Name": "reference_lname",
       "Ref. Email": "reference_email"
@@ -49,9 +50,9 @@ $(document).ready(function(){
         $("#field").append($("<option></option>").attr("value", "all").text("Anything"));
         var keys = Object.keys(options[i]);
         var vals = Object.values(options[i]);
+        // FIX Wrong options change. Use for...in. Next time.
         $.each(options, function(key,value) {
-        $("#field").append($("<option></option>")
-           .attr("id", keys[key]).text(keys[key]));
+            $("#field").append($("<option></option>").attr("id", keys[key]).text(keys[key]));
          });
       }
     }
