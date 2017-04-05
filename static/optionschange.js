@@ -45,17 +45,14 @@ $(document).ready(function(){
     }];
     for (var i = 0; i < arr.length; i++) {
       if (tbl == arr[i]) {
-        $(arr[i]).show();
         $("#field").empty();
         $("#field").append($("<option></option>").attr("value", "all").text("Anything"));
         var keys = Object.keys(options[i]);
         var vals = Object.values(options[i]);
         $.each(options, function(key,value) {
         $("#field").append($("<option></option>")
-           .attr("value", vals[key]).text(keys[key]));
+           .attr("id", keys[key]).text(keys[key]));
          });
-      } else {
-        $(arr[i]).hide();
       }
     }
 

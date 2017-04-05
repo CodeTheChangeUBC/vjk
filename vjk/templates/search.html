@@ -7,6 +7,7 @@
   <script type='text/javascript' src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   {% load static %}
   <script type="text/javascript" src="{% static "search.js" %}"></script>
+  <script type="text/javascript" src="{% static "tableschange.js" %}"></script>
   <script type="text/javascript" src="{% static "optionschange.js" %}"></script>
   <script type="text/javascript" src="{% static "delete.js" %}"></script>
 </head>
@@ -28,21 +29,21 @@
     <input id="input" type="text" placeholder="Search">
       <select id="field">
         <option value="all">Anything</option>
-        <option value="first_name">First Name</option>
-        <option value="last_name">Last Name</option>
-        <option value="email">Email</option>
-        <option value="phone">Phone</option>
-        <option value="donor">Donor</option>
+        <option value="First Name">First Name</option>
+        <option value="Last Name">Last Name</option>
+        <option value="Email">Email</option>
+        <option value="Phone">Phone</option>
+        <option value="Donor">Donor</option>
       </select>
     <input id="submit" type="button" class="btn searchbutton" value="Search"></input>
   </form>
   <button id="delete" class="btn btn-danger">DELETE Selected</button>
   <hr>
-  <div class=".all">
-  <div class="contacts">
+  <div class="all">
+  <div class="contacts-div">
     <h3>Contacts</h3>
       {% if contacts_list %}
-        <table class="table">
+        <table id="contacts" class="table">
           <tr>
             <th>Select</th>
             <th>ID</th>
@@ -76,10 +77,10 @@
     <hr>
   </div>
 
-  <div class="donors" hidden>
+  <div class="donors-div" hidden>
     <h3>Donors</h3>
       {% if donors_list %}
-        <table class="table">
+        <table id="donors" class="table">
           <tr>
             <th>Select</th>
             <th>ID</th>
@@ -109,10 +110,10 @@
     <hr>
   </div>
   <!-- Change in DB? -->
-  <div class="sponsors" hidden>
+  <div class="sponsors-div" hidden>
       <h3>Sponsors</h3>
       {% if sponsors_list %}
-        <table class="table">
+        <table id="sponsors" class="table">
           <tr>
             <th>Select</th>
             <th>ID</th>
@@ -137,10 +138,10 @@
     {% endif %}
     <hr>
   </div>
-    <div class="students" hidden>
+    <div class="students-div" hidden>
       <h3>Students</h3>
         {% if students_list %}
-          <table class="table">
+          <table id="students" class="table">
             <tr>
               <th>Select</th>
               <th>ID</th>
@@ -175,10 +176,10 @@
       {% endif %}
       <hr>
     </div>
-    <div class="Volunteers" hidden>
+    <div class="volunteers-div" hidden>
       <h3>Volunteers</h3>
         {% if volunteers_list %}
-          <table class="table">
+          <table id="volunteers" class="table">
             <tr>
               <th>Select</th>
               <th>ID</th>
