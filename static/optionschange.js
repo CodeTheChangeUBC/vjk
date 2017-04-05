@@ -2,58 +2,19 @@ $(document).ready(function(){
   $("#table").change(function() {
     var arr = [".contacts", ".donors", ".sponsors", ".students", ".volunteers"];
     var tbl = "." + $("#table").val();
-    var options =
-    [{
-      "First Name": "first_name",
-      "Last Name": "last_name",
-      "Email":"email",
-      "Phone":"phone",
-      "Donor":"donor",
-      "Sponsor":"sponsor",
-      "Student":"student",
-      "Volunteer":"volunteer"
-    },
-    {
-      "Org Name":"org_name",
-      "Location":"location",
-      "Year donation":"year_donation",
-      "Amount Donated":"amount_donation",
-      "Primary Contact ID":"primary_contact_id",
-      "secondary Contact ID":"secondary_contact_id"
-    },
-    {
-      "Name": "name",
-      "Service Provided": "service_provided"
-    },
-    {
-      "First Name": "first_name",
-      "Last Name": "last_name",
-      "Email": "email",
-      "Location": "location",
-      "School": "school",
-      "Year Attended": "year_attended",
-      "Ref. First Name": "reference_fname",
-      "Ref. Last Name": "reference_lname",
-      "Ref. Email": "reference_email"
-    },
-    {
-      "First Name": "first_name",
-      "Last Name": "last_name",
-      "Email": "email",
-      "Phone": "phone",
-      "Role": "role",
-      "Years Helped": "years_helped"
-    }];
+    var options = [
+    ["First Name", "Last Name", "Email", "Phone", "Donor", "Sponsor", "Student", "Volunteer"],
+    ["Org Name", "Location", "Year donation", "Amount Donated", "Primary Contact ID", "Secondary Contact ID"],
+    ["Name", "Service Provided"],
+    ["First Name", "Last Name", "Email", "Location", "School", "Year Attended", "Ref. First Name", "Ref. Last Name", "Ref. Email"],
+    ["First Name", "Last Name", "Email", "Phone", "Role", "Years Helped"]];
     for (var i = 0; i < arr.length; i++) {
       if (tbl == arr[i]) {
         $("#field").empty();
         $("#field").append($("<option></option>").attr("value", "all").text("Anything"));
-        var keys = Object.keys(options[i]);
-        var vals = Object.values(options[i]);
-        // FIX Wrong options change. Use for...in. Next time.
-        $.each(options, function(key,value) {
-            $("#field").append($("<option></option>").attr("id", keys[key]).text(keys[key]));
-         });
+        for (var j=0; j<options[i].length;j++) {
+          $("#field").append($("<option></option>").attr("value", options[i][j]).text(options[i][j]));
+        }
       }
     }
 
