@@ -40,16 +40,24 @@ def add(request):
 
 	return HttpResponse("add entries in tables.")
 
-def delete(request, table, id):
-    if table == "contacts":
-        row = Contacts.objects.get(pk = id)
-    elif table == "donors":
-        row = Donors.objects.get(pk = id)
-    elif table == "sponsors":
-        row = Sponsors.objects.get(pk = id)
-    elif table == "students":
-        row = Students.objects.get(pk = id)
-    elif table == "volunteers":
-        row = Volunteers.objects.get(pk = id)
-    row.delete()
-    return HttpResponse('deleted')
+def delete(request):
+    if request.POST:
+        table = request.POST["table"]
+        id = request.POST["id"]
+        if table == "contacts":
+            row = Contacts.objects.get(pk = id)
+        elif table == "donors":
+            row = Donors.objects.get(pk = id)
+        elif table == "sponsors":
+            row = Sponsors.objects.get(pk = id)
+        elif table == "students":
+            row = Students.objects.get(pk = id)
+        elif table == "volunteers":
+            row = Volunteers.objects.get(pk = id)
+        row.delete()
+    template = loader.get_template("delete.html")
+    context = {
+        "table" : table,
+        "id" : id
+    }
+    return HttpResponse(template.render(context,request))
