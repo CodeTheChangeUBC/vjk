@@ -14,9 +14,7 @@
 
 <body>
   <div class="container-fluid">
-
     <h1>Search Page</h1>
-    <form>
     <h3>For
       <select id="table">
         <option value="contacts">Contacts</option>
@@ -26,7 +24,7 @@
         <option value="volunteers">Volunteers</option>
       </select>
     </h3>
-    <input id="input" type="text" placeholder="Search">
+    <input id="input" type="text" placeholder="Search" onsubmit="initiateSearch">
       <select id="field">
         <option value="all">Anything</option>
         <option value="First Name">First Name</option>
@@ -36,7 +34,7 @@
         <option value="Donor">Donor</option>
       </select>
     <input id="submit" type="button" class="btn searchbutton" value="Search"></input>
-  </form>
+    <br>
   <button id="delete" class="btn btn-danger">DELETE Selected</button>
   <hr>
   <div class="all">

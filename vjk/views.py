@@ -18,6 +18,7 @@ def search(request):
 
     	template = loader.get_template("search.html")
     	context = {
+            "request": request,
 	        "contacts_list": contacts_list,
 			"donors_list": donors_list,
 			"sponsors_list": sponsors_list,

@@ -1,5 +1,13 @@
 $(document).ready(function(){
   $("#submit").on("click", function(){
+    initiateSearch();
+  })
+  $("#input").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        initiateSearch();
+    }
+  });
+  function initiateSearch() {
     var tbl = $("#table").val();
     var inpt = $("#input").val();
     var fild = $("#field").val();
@@ -14,8 +22,7 @@ $(document).ready(function(){
         $(this).show();
       })
     }
-  })
-
+  }
   function searchByFilter(table, input, field) {
     // 0 is a temporary number and should be replaced.
     var column_num;
@@ -53,7 +60,6 @@ $(document).ready(function(){
         var bool = false;
         for (var i=1; i < lgth; i++) {
           var val = $(this).find("td").eq(i).html();
-          console.log(val);
           if (val == input) { bool = true; }
         }
         if (bool) { $(this).show(); }
