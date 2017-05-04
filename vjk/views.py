@@ -15,16 +15,15 @@ def search(request):
 	sponsors_list = Sponsors.objects.all()
 	students_list = Students.objects.all()
 	volunteers_list = Volunteers.objects.all()
-
-    	template = loader.get_template("search.html")
-    	context = {
+	template = loader.get_template("search.html")
+	context = {
             "request": request,
 	        "contacts_list": contacts_list,
 			"donors_list": donors_list,
 			"sponsors_list": sponsors_list,
 			"students_list": students_list,
 			"volunteers_list": volunteers_list
-	    }
+	    	}
 	return HttpResponse(template.render(context, request))
 
 def home(request):
