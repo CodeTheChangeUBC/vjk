@@ -1,0 +1,226 @@
+<html>
+<head>
+  <title>Search Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- jQuery import -->
+  <script type='text/javascript' src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  {% load static %}
+  <script type="text/javascript" src="{% static "search.js" %}"></script>
+  <script type="text/javascript" src="{% static "tableschange.js" %}"></script>
+  <script type="text/javascript" src="{% static "optionschange.js" %}"></script>
+  <script type="text/javascript" src="{% static "delete.js" %}"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <h1>Search Page</h1>
+    <h3>For
+      <select id="table">
+        <option value="contacts">Contacts</option>
+        <option value="donors">Donors</option>
+        <option value="sponsors">Sponsors</option>
+        <option value="students">Students</option>
+        <option value="volunteers">Volunteers</option>
+      </select>
+    </h3>
+    <input id="input" type="text" placeholder="Search" onsubmit="initiateSearch">
+    <select id="field">
+      <option value="all">Anything</option>
+      <option value="First Name">First Name</option>
+      <option value="Last Name">Last Name</option>
+      <option value="Email">Email</option>
+      <option value="Phone">Phone</option>
+      <option value="Donor">Donor</option>
+    </select>
+    <input id="submit" type="button" class="btn searchbutton" value="Search"></input>
+
+    <hr>
+    <div class="all">
+      <div class="contacts-div">
+        <h3>Contacts</h3>
+        {% if contacts_list %}
+        <table id="contacts" class="table">
+          <tr>
+            <th>Select</th>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Donor</th>
+            <th>Sponsor</th>
+            <th>Student</th>
+            <th>Volunteer</th>
+          </tr>
+          {% for contact in contacts_list %}
+          <tr>
+            <td><input type="checkbox" name="deletebox" value=con{{contact.id}}></td>
+            <td id="{{contact.id}}">{{contact.id}}</td>
+            <td>{{contact.first_name}}</td>
+            <td>{{contact.last_name}}</td>
+            <td>{{contact.email}}</td>
+            <td>{{contact.phone}}</td>
+            <td>{{contact.donor}}</td>
+            <td>{{contact.sponsor}}</td>
+            <td>{{contact.student}}</td>
+            <td>{{contact.volunteer}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>No Contact data are available.</p>
+        {% endif %}
+        <hr>
+      </div>
+
+      <div class="donors-div" hidden>
+        <h3>Donors</h3>
+        {% if donors_list %}
+        <table id="donors" class="table">
+          <tr>
+            <th>Select</th>
+            <th>ID</th>
+            <th>Org Name</th>
+            <th>Location</th>
+            <th>Year Donated</th>
+            <th>Amount donated</th>
+            <th>Primary Contact ID</th>
+            <th>Secondary Contact ID</th>
+          </tr>
+          {% for donor in donors_list %}
+          <tr>
+            <td><input type="checkbox" name="deletebox" value=don{{donor.id}}></td>
+            <td>{{donor.id}}</td>
+            <td>{{donor.org_name}}</td>
+            <td>{{donor.location}}</td>
+            <td>{{donor.year_donation}}</td>
+            <td>{{donor.amount_donation}}</td>
+            <td>{{donor.primary_contact_id}}</td>
+            <td>{{donor.secondary_contact_id}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>No Donor data are available.</p>
+        {% endif %}
+        <hr>
+      </div>
+      <!-- Change in DB? -->
+      <div class="sponsors-div" hidden>
+        <h3>Sponsors</h3>
+        {% if sponsors_list %}
+        <table id="sponsors" class="table">
+          <tr>
+            <th>Select</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Service Provided</th>
+            <th>Primary Contact ID</th>
+            <th>Secondary Contact ID</th>
+          </tr>
+          {% for sponsor in sponsors_list %}
+          <tr>
+            <td><input type="checkbox" name="deletebox" value=spo{{sponsor.id}}></td>
+            <td>{{sponsor.id}}</td>
+            <td>{{sponsor.name}}</td>
+            <td>{{sponsor.service_provided}}</td>
+            <td>{{sponsor.primary_contact_id}}</td>
+            <td>{{sponsor.secondary_contact_id}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>No Sponsor data are available.</p>
+        {% endif %}
+        <hr>
+      </div>
+      <div class="students-div" hidden>
+        <h3>Students</h3>
+        {% if students_list %}
+        <table id="students" class="table">
+          <tr>
+            <th>Select</th>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Location</th>
+            <th>School</th>
+            <th>Year Attended</th>
+            <th>Ref. First Name</th>
+            <th>Ref. Last Name</th>
+            <th>Ref. Email</th>
+          </tr>
+          {% for student in students_list %}
+          <tr>
+            <td><input type="checkbox" name="deletebox" value=stu{{student.id}}></td>
+            <td>{{student.id}}</td>
+            <td>{{student.first_name}}</td>
+            <td>{{student.last_name}}</td>
+            <td>{{student.email}}</td>
+            <td>{{student.location}}</td>
+            <td>{{student.school}}</td>
+            <td>{{student.year_attended}}</td>
+            <td>{{student.reference_fname}}</td>
+            <td>{{student.reference_lname}}</td>
+            <td>{{student.reference_email}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>No Student data are available.</p>
+        {% endif %}
+        <hr>
+      </div>
+      <div class="volunteers-div" hidden>
+        <h3>Volunteers</h3>
+        {% if volunteers_list %}
+        <table id="volunteers" class="table">
+          <tr>
+            <th>Select</th>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>Years Helped</th>
+          </tr>
+          {% for volunteer in volunteers_list %}
+          <tr>
+            <td><input type="checkbox" name="deletebox" value=vol{{volunteer.id}}></td>
+            <td>{{volunteer.id}}</td>
+            <td>{{volunteer.first_name}}</td>
+            <td>{{volunteer.last_name}}</td>
+            <td>{{volunteer.email}}</td>
+            <td>{{volunteer.phone}}</td>
+            <td>{{volunteer.role}}</td>
+            <td>{{volunteer.years_helped}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>No Volunteer data are available.</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="delete">
+      <h4>DELETE FROM</h4>
+      <form class="form" action="/delete-entries/" method="post">{% csrf_token %}
+        <select name="table">
+          <option value="contacts">Contacts</option>
+          <option value="donors">Donors</option>
+          <option value="sponsors">Sponsors</option>
+          <option value="students">Students</option>
+          <option value="volunteers">Volunteers</option>
+        </select><br>
+        <h4>WHERE ID =</h4>
+        <input type="text" name="id" value="" placeholder=""></input><br><br>
+        <button id="delete" class="btn btn-danger">DELETE</button>
+      </form>
+      <p><strong>NOTE:</strong> It takes few seconds for the database to update changes and may require refreshing the page after deleting entries.</p>
+    </div>
+  </div>
+</body>
+</html>
