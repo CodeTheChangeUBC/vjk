@@ -40,5 +40,16 @@ def add(request):
 
 	return HttpResponse("add entries in tables.")
 
-def delete(request):
-	return HttpResponse("delete entries in tables.")
+def delete(request, table, id):
+    if table == "contacts":
+        row = Contacts.objects.get(pk = id)
+    elif table == "donors":
+        row = Donors.objects.get(pk = id)
+    elif table == "sponsors":
+        row = Sponsors.objects.get(pk = id)
+    elif table == "students":
+        row = Students.objects.get(pk = id)
+    elif table == "volunteers":
+        row = Volunteers.objects.get(pk = id)
+    row.delete()
+    return HttpResponse('deleted')
