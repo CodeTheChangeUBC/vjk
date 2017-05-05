@@ -36,6 +36,8 @@
 
     <hr>
     <div class="all">
+      <form action="/modify-entries/" method="post">
+        {% csrf_token %}
       <div class="contacts-div">
         <h3>Contacts</h3>
         {% if contacts_list %}
@@ -54,7 +56,7 @@
           </tr>
           {% for contact in contacts_list %}
           <tr>
-            <td><input type="checkbox" name="deletebox" value=con{{contact.id}}></td>
+            <td><input type="checkbox" name="checks" value=con{{contact.id}}></td>
             <td id="{{contact.id}}">{{contact.id}}</td>
             <td>{{contact.first_name}}</td>
             <td>{{contact.last_name}}</td>
@@ -89,7 +91,7 @@
           </tr>
           {% for donor in donors_list %}
           <tr>
-            <td><input type="checkbox" name="deletebox" value=don{{donor.id}}></td>
+            <td><input type="checkbox" name="checks" value=don{{donor.id}}></td>
             <td>{{donor.id}}</td>
             <td>{{donor.org_name}}</td>
             <td>{{donor.location}}</td>
@@ -120,7 +122,7 @@
           </tr>
           {% for sponsor in sponsors_list %}
           <tr>
-            <td><input type="checkbox" name="deletebox" value=spo{{sponsor.id}}></td>
+            <td><input type="checkbox" name="checks" value=spo{{sponsor.id}}></td>
             <td>{{sponsor.id}}</td>
             <td>{{sponsor.name}}</td>
             <td>{{sponsor.service_provided}}</td>
@@ -153,7 +155,7 @@
           </tr>
           {% for student in students_list %}
           <tr>
-            <td><input type="checkbox" name="deletebox" value=stu{{student.id}}></td>
+            <td><input type="checkbox" name="checks" value=stu{{student.id}}></td>
             <td>{{student.id}}</td>
             <td>{{student.first_name}}</td>
             <td>{{student.last_name}}</td>
@@ -188,7 +190,7 @@
           </tr>
           {% for volunteer in volunteers_list %}
           <tr>
-            <td><input type="checkbox" name="deletebox" value=vol{{volunteer.id}}></td>
+            <td><input type="checkbox" name="checks" value=vol{{volunteer.id}}></td>
             <td>{{volunteer.id}}</td>
             <td>{{volunteer.first_name}}</td>
             <td>{{volunteer.last_name}}</td>
@@ -206,8 +208,7 @@
     </div>
     <div class="delete">
       <h4>DELETE FROM</h4>
-      <form class="form" action="/delete-entries/" method="post">{% csrf_token %}
-        <select name="table">
+      <select name="table">
           <option value="contacts">Contacts</option>
           <option value="donors">Donors</option>
           <option value="sponsors">Sponsors</option>
@@ -216,13 +217,24 @@
         </select><br>
         <h4>WHERE ID =</h4>
         <input type="text" name="id" value="" placeholder=""></input><br><br>
-        <button id="delete" class="btn btn-danger">DELETE</button>
-      </form>
+        <button name="delete" class="btn btn-danger">DELETE</button>
       <p><strong>NOTE:</strong> It takes few seconds for the database to update changes and may require refreshing the page after deleting entries.</p>
     </div>
     <div class="email">
-      
+      <h4>Email</h4>
+      <select name="table">
+          <option value="contacts">Contacts</option>
+          <option value="donors">Donors</option>
+          <option value="sponsors">Sponsors</option>
+          <option value="students">Students</option>
+          <option value="volunteers">Volunteers</option>
+        </select><br>
+        <h4>WHERE ID =</h4>
+        <input type="text" name="id" value="" placeholder=""></input><br><br>
+        <button name="email" class="btn btn-danger">Email</button>
+      <p><strong>NOTE:</strong> It takes few seconds for the database to update changes and may require refreshing the page after deleting entries.</p>
     </div>
+    </form>
   </div>
 </body>
 </html>
