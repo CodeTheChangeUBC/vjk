@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader, Context
+from django.core import mail
 
 from .models import Contacts
 from .models import Donors
@@ -30,7 +31,20 @@ def home(request):
 	return HttpResponse("you can choose what you want to do.")
 
 def email(request):
-	return HttpResponse("send email to different people.")
+	connection = mail.get_connection()
+	connection.open()
+	receiver_list = request.POST["emails"]
+	sender_email = "win981026@gmail.com"
+	title = request.POST["title"]
+	body = request.POST["body"]
+	email = mail.EmailMessage(title, body, sender_email, receiver_list, connection=connection)
+	email.send()
+
+	template = loader.get_template("email.html")
+	context = {
+		"length" : receiver_list.size
+	}
+	return HttpResponse(template.render(context,request))
 
 def edit(request):
 	return HttpResponse("edit entries in tables.")
