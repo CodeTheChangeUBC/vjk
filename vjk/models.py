@@ -18,11 +18,9 @@ class Donor(models.Model):
 	org_name = models.CharField(max_length = 50)
 	location = models.CharField(max_length = 100)
 	year_donation = models.IntegerField()
-	amount_donation = models.IntegerField()
+	amount_donation = models.IntegerField(verbose_name="Amount Donated")
 	primary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
 	secondary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
-
-	amount_donation.short_description = 'Amount Donated'
 
 class Sponsor(models.Model):
 	name = models.CharField(max_length = 50)
@@ -37,8 +35,10 @@ class Student(models.Model):
 	location = models.CharField(max_length = 100)
 	school = models.CharField(max_length = 75)
 	year_attended = models.IntegerField()
-	reference_fname = models.CharField(max_length=75,default="")
-	reference_lname = models.CharField(max_length=75,default="")
+	reference_fname = models.CharField(max_length=75,default="", 
+										verbose_name="Reference First Name")
+	reference_lname = models.CharField(max_length=75,default="", 
+										verbose_name="Reference Last Name")
 	reference_email = models.EmailField(default="")
 
 class Volunteer(models.Model):
