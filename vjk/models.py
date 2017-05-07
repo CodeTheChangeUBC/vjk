@@ -22,6 +22,8 @@ class Donor(models.Model):
 	primary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
 	secondary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
 
+	amount_donation.short_description = 'Amount Donated'
+
 class Sponsor(models.Model):
 	name = models.CharField(max_length = 50)
 	service_provided = models.CharField(max_length = 50)
