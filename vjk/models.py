@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Contacts(models.Model):
+class Contact(models.Model):
 	first_name = models.CharField(max_length = 75)
 	last_name = models.CharField(max_length = 75)
 	email = models.EmailField()
@@ -11,21 +11,24 @@ class Contacts(models.Model):
 	student = models.BooleanField()
 	volunteer = models.BooleanField()
 
-class Donors(models.Model):
+	def __str__(self):
+		return self.first_name
+
+class Donor(models.Model):
 	org_name = models.CharField(max_length = 50)
 	location = models.CharField(max_length = 100)
 	year_donation = models.IntegerField()
 	amount_donation = models.IntegerField()
-	primary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
-	secondary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
+	primary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
+	secondary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
 
-class Sponsors(models.Model):
+class Sponsor(models.Model):
 	name = models.CharField(max_length = 50)
 	service_provided = models.CharField(max_length = 50)
-	primary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
-	secondary_contact = models.ForeignKey('Contacts', on_delete=models.PROTECT, related_name="+", default=-1)
+	primary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
+	secondary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
 
-class Students(models.Model):
+class Student(models.Model):
 	first_name = models.CharField(max_length = 75)
 	last_name = models.CharField(max_length = 75)
 	email = models.EmailField()
@@ -36,7 +39,7 @@ class Students(models.Model):
 	reference_lname = models.CharField(max_length=75,default="")
 	reference_email = models.EmailField(default="")
 
-class Volunteers(models.Model):
+class Volunteer(models.Model):
 	first_name = models.CharField(max_length = 75)
 	last_name = models.CharField(max_length = 75)
 	email = models.EmailField()

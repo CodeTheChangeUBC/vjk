@@ -2,19 +2,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader, Context
 
-from .models import Contacts
-from .models import Donors
-from .models import Sponsors
-from .models import Students
-from .models import Volunteers
+from .models import Contact, Donor, Sponsor, Student, Volunteer
 
 # Create your views here.
 def search(request):
-	contacts_list = Contacts.objects.all()
-	donors_list = Donors.objects.all()
-	sponsors_list = Sponsors.objects.all()
-	students_list = Students.objects.all()
-	volunteers_list = Volunteers.objects.all()
+	contacts_list = Contact.objects.all()
+	donors_list = Donor.objects.all()
+	sponsors_list = Sponsor.objects.all()
+	students_list = Student.objects.all()
+	volunteers_list = Volunteer.objects.all()
 	template = loader.get_template("search.html")
 	context = {
             "request": request,
