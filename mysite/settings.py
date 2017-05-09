@@ -31,9 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'vjk.apps.VjkConfig',
     'django.contrib.admin',
     'django.contrib.auth',
-    'vjk.apps.VjkConfig',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -129,3 +129,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "djangoenv/static_cdn")
+
+
+# Redirect to home URL after login 
+LOGIN_REDIRECT_URL = '/'

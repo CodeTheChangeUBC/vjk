@@ -1,8 +1,26 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader, Context
+from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 from .models import Contact, Donor, Sponsor, Student, Volunteer
+
+@login_required(login_url='/login/', redirect_field_name='redirect')
+def index(request):
+    contacts = Contact.objects.all()
+    donors = Donor.objects.all()
+    sponsors = Sponsor.objects.all()
+    students = Student.objects.all()
+    volunteers = Volunteer.objects.all()
+    context = Context({
+        'contacts': contacts,
+        'donors': donors,
+        'spnsors': sponsors,
+        'students': students,
+        'volunteers': volunteers
+        })
+    return render(request, 'vjk/index.html', context)
 
 # Create your views here.
 def search(request):
@@ -22,18 +40,10 @@ def search(request):
 	    	}
 	return HttpResponse(template.render(context, request))
 
-def home(request):
-	return HttpResponse("you can choose what you want to do.")
+
 
 def email(request):
 	return HttpResponse("send email to different people.")
-
-def edit(request):
-	return HttpResponse("edit entries in tables.")
-
-def add(request):
-
-	return HttpResponse("add entries in tables.")
 
 def delete(request):
     if request.POST:

@@ -11,6 +11,13 @@ class Contact(models.Model):
 	student = models.BooleanField()
 	volunteer = models.BooleanField()
 
+	def type(self):
+		if self.donor   	: return 'Donor'
+		if self.sponsor 	: return 'Sponsor'
+		if self.student 	: return 'Student'
+		if self.volunteer 	: return 'volunteer'
+		return 'None'
+
 	def __str__(self):
 		return self.first_name
 
