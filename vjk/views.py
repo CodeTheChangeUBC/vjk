@@ -40,8 +40,6 @@ def search(request):
 	    	}
 	return HttpResponse(template.render(context, request))
 
-
-
 def email(request):
 	return HttpResponse("send email to different people.")
 
