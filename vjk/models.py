@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class ContactInfo(models.Model):
+class Contact(models.Model):
 	first_name = models.CharField(max_length = 75)
 	last_name = models.CharField(max_length = 75)
 	email = models.EmailField()
@@ -10,9 +10,6 @@ class ContactInfo(models.Model):
 	sponsor = models.BooleanField()
 	student = models.BooleanField()
 	volunteer = models.BooleanField()
-
-	class Meta:
-		abstract = True
 
 	def type(self):
 		if self.donor   	: return 'Donor'
@@ -24,15 +21,19 @@ class ContactInfo(models.Model):
 	def __str__(self):
 		return self.first_name
 
-class Donor(ContactInfo):
+class Donor(models.Model):
 	org_name = models.CharField(max_length = 50)
 	location = models.CharField(max_length = 100)
 	year_donation = models.IntegerField()
 	amount_donation = models.IntegerField(verbose_name="Amount Donated")
+	primary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
+	secondary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
 
-class Sponsor(ContactInfo):
+class Sponsor(models.Model):
 	name = models.CharField(max_length = 50)
 	service_provided = models.CharField(max_length = 50)
+	primary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
+	secondary_contact = models.ForeignKey('Contact', on_delete=models.PROTECT, related_name="+", default=-1)
 
 class Student(models.Model):
 	first_name = models.CharField(max_length = 75)
@@ -47,6 +48,10 @@ class Student(models.Model):
 										verbose_name="Reference Last Name")
 	reference_email = models.EmailField(default="")
 
-class Volunteer(ContactInfo):
+class Volunteer(models.Model):
+	first_name = models.CharField(max_length = 75)
+	last_name = models.CharField(max_length = 75)
+	email = models.EmailField()
+	phone = models.CharField(max_length  = 20)
 	role = models.CharField(max_length = 75)
 	years_helped = models.CharField(max_length=75,default="") 
