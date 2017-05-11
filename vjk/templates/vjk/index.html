@@ -1,0 +1,58 @@
+<h1>VJK Data</h1>
+<p><a href="{% url 'logout' %}">Log out</a></p>
+<p>Find me at vjk/templates/vjk/index.html. This is only an example. Structure
+may change is data model changes. TODO: Fill out tables for other models (wait until data model finalized).</p>
+
+<h2>All Contacts</h2>
+<table style="width: 80%">
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Phone</th>
+		<th>Type</th>
+	</tr>
+	{% for contact in contacts %}
+	<tr>
+		<th>{{ contact.first_name }} {{ contact.last_name }}</th>
+		<th>{{ contact.email }}</th>
+		<th>{{ contact.phone }}</th>
+		<th>{{ contact.type }}</th>
+	</tr>
+	{% endfor %}
+</table>
+
+<h2>All Donors</h2>
+<ul>
+{% for donor in donors %}
+<li><a href="{{ donor.link.url }}"></a>{{ donor.org_name }}</li>
+{% endfor %}
+</ul>
+
+<h2>All Sponsors</h2>
+<ul>
+{% for sponsor in sponsors %}
+<li><a href="{{ sponsor.link.url }}"></a>{{ sponsor.name }}</li>
+{% endfor %}
+</ul>
+
+<h2>All Student</h2>
+<ul>
+{% for student in students %}
+<li><a href="{{ student.link.url }}"></a>{{ student.first_name }} {{ student.last_name }}</li>
+{% endfor %}
+</ul>
+
+<h2>All Volunteers</h2>
+<ul>
+{% for volunteer in volunteers %}
+<li><a href="{{ volunteer.link.url }}"></a>{{ volunteer.first_name }} {{volunteer.last_name }}</li>
+{% endfor %}
+</ul>
+
+
+
+
+
+
+
+

@@ -1,21 +1,38 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader, Context
+<<<<<<< HEAD
 from django.core import mail
+=======
+from django.views import generic
+from django.contrib.auth.decorators import login_required
+>>>>>>> master
 
-from .models import Contacts
-from .models import Donors
-from .models import Sponsors
-from .models import Students
-from .models import Volunteers
+from .models import Contact, Donor, Sponsor, Student, Volunteer
+
+@login_required(login_url='/login/', redirect_field_name='redirect')
+def index(request):
+    contacts = Contact.objects.all()
+    donors = Donor.objects.all()
+    sponsors = Sponsor.objects.all()
+    students = Student.objects.all()
+    volunteers = Volunteer.objects.all()
+    context = Context({
+        'contacts': contacts,
+        'donors': donors,
+        'spnsors': sponsors,
+        'students': students,
+        'volunteers': volunteers
+        })
+    return render(request, 'vjk/index.html', context)
 
 # Create your views here.
 def search(request):
-	contacts_list = Contacts.objects.all()
-	donors_list = Donors.objects.all()
-	sponsors_list = Sponsors.objects.all()
-	students_list = Students.objects.all()
-	volunteers_list = Volunteers.objects.all()
+	contacts_list = Contact.objects.all()
+	donors_list = Donor.objects.all()
+	sponsors_list = Sponsor.objects.all()
+	students_list = Student.objects.all()
+	volunteers_list = Volunteer.objects.all()
 	template = loader.get_template("search.html")
 	context = {
             "request": request,
@@ -27,8 +44,7 @@ def search(request):
 	    	}
 	return HttpResponse(template.render(context, request))
 
-def home(request):
-	return HttpResponse("you can choose what you want to do.")
+
 
 def email(request):
 	connection = mail.get_connection()
@@ -45,13 +61,6 @@ def email(request):
 		"length" : receiver_list.size
 	}
 	return HttpResponse(template.render(context,request))
-
-def edit(request):
-	return HttpResponse("edit entries in tables.")
-
-def add(request):
-
-	return HttpResponse("add entries in tables.")
 
 def delete(request):
     if request.POST:
