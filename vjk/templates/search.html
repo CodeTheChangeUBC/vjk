@@ -9,6 +9,7 @@
   <script type="text/javascript" src="{% static "search.js" %}"></script>
   <script type="text/javascript" src="{% static "tableschange.js" %}"></script>
   <script type="text/javascript" src="{% static "optionschange.js" %}"></script>
+  <script type="text/javascript" src="{% static "email.js" %}"></script>
 </head>
 
 <body>
@@ -32,11 +33,12 @@
       <option value="Phone">Phone</option>
       <option value="Donor">Donor</option>
     </select>
-    <input id="submit" type="button" class="btn searchbutton" value="Search"></input>
-
+    <input id="submit" type="button" class="btn" value="Search"></input>
+    <br><br>
+    <input id="download" type="button" class="btn" value="Copy Selected Email Addresses"></input>
     <hr>
     <div class="all">
-      <form action="/modify-entries/" method="post">
+      <form action="/delete-entries/" method="post">
         {% csrf_token %}
       <div class="contacts-div">
         <h3>Contacts</h3>
@@ -56,7 +58,7 @@
           </tr>
           {% for contact in contacts_list %}
           <tr>
-            <td><input type="checkbox" name="checks" value=con{{contact.id}}></td>
+            <td><input type="checkbox" name="checks" value={{contact.email}}></td>
             <td id="{{contact.id}}">{{contact.id}}</td>
             <td>{{contact.first_name}}</td>
             <td>{{contact.last_name}}</td>
@@ -80,7 +82,6 @@
         {% if donors_list %}
         <table id="donors" class="table">
           <tr>
-            <th>Select</th>
             <th>ID</th>
             <th>Org Name</th>
             <th>Location</th>
@@ -91,7 +92,6 @@
           </tr>
           {% for donor in donors_list %}
           <tr>
-            <td><input type="checkbox" name="checks" value=don{{donor.id}}></td>
             <td>{{donor.id}}</td>
             <td>{{donor.org_name}}</td>
             <td>{{donor.location}}</td>
@@ -113,7 +113,6 @@
         {% if sponsors_list %}
         <table id="sponsors" class="table">
           <tr>
-            <th>Select</th>
             <th>ID</th>
             <th>Name</th>
             <th>Service Provided</th>
@@ -122,7 +121,6 @@
           </tr>
           {% for sponsor in sponsors_list %}
           <tr>
-            <td><input type="checkbox" name="checks" value=spo{{sponsor.id}}></td>
             <td>{{sponsor.id}}</td>
             <td>{{sponsor.name}}</td>
             <td>{{sponsor.service_provided}}</td>
@@ -155,7 +153,7 @@
           </tr>
           {% for student in students_list %}
           <tr>
-            <td><input type="checkbox" name="checks" value=stu{{student.id}}></td>
+            <td><input type="checkbox" name="checks" value={{student.email}}></td>
             <td>{{student.id}}</td>
             <td>{{student.first_name}}</td>
             <td>{{student.last_name}}</td>
@@ -190,7 +188,7 @@
           </tr>
           {% for volunteer in volunteers_list %}
           <tr>
-            <td><input type="checkbox" name="checks" value=vol{{volunteer.id}}></td>
+            <td><input type="checkbox" name="checks" value={{volunteer.email}}></td>
             <td>{{volunteer.id}}</td>
             <td>{{volunteer.first_name}}</td>
             <td>{{volunteer.last_name}}</td>
@@ -218,20 +216,6 @@
         <h4>WHERE ID =</h4>
         <input type="text" name="id" value="" placeholder=""></input><br><br>
         <button name="delete" class="btn btn-danger">DELETE</button>
-      <p><strong>NOTE:</strong> It takes few seconds for the database to update changes and may require refreshing the page after deleting entries.</p>
-    </div>
-    <div class="email">
-      <h4>Email</h4>
-      <select name="table">
-          <option value="contacts">Contacts</option>
-          <option value="donors">Donors</option>
-          <option value="sponsors">Sponsors</option>
-          <option value="students">Students</option>
-          <option value="volunteers">Volunteers</option>
-        </select><br>
-        <h4>WHERE ID =</h4>
-        <input type="text" name="id" value="" placeholder=""></input><br><br>
-        <button name="email" class="btn btn-danger">Email</button>
       <p><strong>NOTE:</strong> It takes few seconds for the database to update changes and may require refreshing the page after deleting entries.</p>
     </div>
     </form>
