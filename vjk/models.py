@@ -33,16 +33,17 @@ class Contact(models.Model):
 
 class Donor(models.Model):
 	org_name 			= models.CharField(max_length = 50)
-	location 			= models.CharField(max_length = 100)
-	year_donation 		= models.IntegerField(verbose_name="Year")
-	amount_donation 	= models.IntegerField(verbose_name="Amount Donated")
+	location 			= models.CharField(max_length = 100, blank=True)
+	year_donation 		= models.IntegerField(verbose_name="Year", blank=True)
+	amount_donation 	= models.IntegerField(verbose_name="Amount Donated", blank=True)
 	primary_contact 	= models.ForeignKey(Contact, 
 								on_delete=models.PROTECT, 
 								related_name="donor1",
-								)
+								blank=True)
 	secondary_contact 	= models.ForeignKey(Contact, 
 								on_delete=models.PROTECT, 
-								related_name="donor2")
+								related_name="donor2", 
+								blank=True)
 	
 
 	def __str__(self):
@@ -50,15 +51,17 @@ class Donor(models.Model):
 
 class Sponsor(models.Model):
 	name 				= models.CharField(max_length = 50)
-	service_provided 	= models.CharField(max_length = 50)
+	service_provided 	= models.CharField(max_length = 50, blank=True)
 	primary_contact 	= models.ForeignKey(Contact, 
 								on_delete=models.PROTECT, 
 								related_name="sponsor1", 
-								default=-1)
+								default=-1, 
+								blank=True)
 	secondary_contact 	= models.ForeignKey(Contact, 
 								on_delete=models.PROTECT, 
 								related_name="sponsor2", 
-								default=-1)
+								default=-1, 
+								blank=True)
 
 	def __str__(self):
 		return self.name
@@ -68,8 +71,8 @@ class Student(models.Model):
 	first_name 			= models.CharField(max_length = 75)
 	last_name 			= models.CharField(max_length = 75)
 	email 				= models.EmailField()
-	location 			= models.CharField(max_length = 100)
-	school 				= models.CharField(max_length = 75)
+	location 			= models.CharField(max_length = 100, blank=True)
+	school 				= models.CharField(max_length = 75, blank=True)
 	year_attended 		= models.IntegerField()
 	reference_fname 	= models.CharField(max_length=75,default="", 
 										verbose_name="Reference First Name")
@@ -86,8 +89,8 @@ class Volunteer(models.Model):
 	last_name 			= models.CharField(max_length = 75)
 	email 				= models.EmailField()
 	phone 				= models.CharField(max_length  = 20)
-	role 				= models.CharField(max_length = 75)
-	years_helped 		= models.CharField(max_length=75,default="") 
+	role 				= models.CharField(max_length = 75, blank=True)
+	years_helped 		= models.CharField(max_length=75,default="", blank=True) 
 
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name

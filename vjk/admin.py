@@ -36,7 +36,7 @@ class StudentAdmin(admin.ModelAdmin):
 		('References',	{'fields': ['reference_fname', 'reference_lname', 'reference_email']})
 	]
 	list_display 	= ('first_name','last_name','email',
-					'location', 'year_attended',
+					'location', 'school', 'year_attended',
 					'reference_fname', 'reference_lname')
 	list_filter 	= ['first_name']
 	search_fields 	= ['first_name','last_name','email',
