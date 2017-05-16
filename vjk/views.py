@@ -9,19 +9,34 @@ from .models import Contact, Donor, Sponsor, Student, Volunteer
 
 @login_required(login_url='/login/', redirect_field_name='redirect')
 def index(request):
-    contacts = Contact.objects.all()
-    donors = Donor.objects.all()
-    sponsors = Sponsor.objects.all()
-    students = Student.objects.all()
-    volunteers = Volunteer.objects.all()
-    context = Context({
-        'contacts': contacts,
-        'donors': donors,
-        'spnsors': sponsors,
-        'students': students,
-        'volunteers': volunteers
-        })
-    return render(request, 'vjk/index.html', context)
+	contacts_list = Contact.objects.all()
+	donors_list = Donor.objects.all()
+	sponsors_list = Sponsor.objects.all()
+	students_list = Student.objects.all()
+	volunteers_list = Volunteer.objects.all()
+	#template = loader.get_template("search.html")
+	context = {
+            "request": request,
+	        "contacts_list": contacts_list,
+			"donors_list": donors_list,
+			"sponsors_list": sponsors_list,
+			"students_list": students_list,
+			"volunteers_list": volunteers_list
+	    	}
+	return render(request, 'vjk/search.html', context)
+    # contacts = Contact.objects.all()
+    # donors = Donor.objects.all()
+    # sponsors = Sponsor.objects.all()
+    # students = Student.objects.all()
+    # volunteers = Volunteer.objects.all()
+    # context = Context({
+    #     'contacts': contacts,
+    #     'donors': donors,
+    #     'spnsors': sponsors,
+    #     'students': students,
+    #     'volunteers': volunteers
+    #     })
+    # return render(request, 'vjk/index.html', context)
 
 # Create your views here.
 def search(request):

@@ -14,7 +14,8 @@
 
 <body>
   <div class="container-fluid">
-    <h1>Search Page</h1>
+    <h1>VJK Database</h1>
+    <p><a href="{% url 'admin:index' %}">Back to Admin Page</a></p>
     <h3>For
       <select id="table">
         <option value="contacts">Contacts</option>
@@ -46,7 +47,6 @@
         <table id="contacts" class="table">
           <tr>
             <th>Select</th>
-            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -59,7 +59,6 @@
           {% for contact in contacts_list %}
           <tr>
             <td><input type="checkbox" name="checks" value={{contact.email}}></td>
-            <td id="{{contact.id}}">{{contact.id}}</td>
             <td>{{contact.first_name}}</td>
             <td>{{contact.last_name}}</td>
             <td>{{contact.email}}</td>
@@ -82,7 +81,6 @@
         {% if donors_list %}
         <table id="donors" class="table">
           <tr>
-            <th>ID</th>
             <th>Org Name</th>
             <th>Location</th>
             <th>Year Donated</th>
@@ -92,7 +90,6 @@
           </tr>
           {% for donor in donors_list %}
           <tr>
-            <td>{{donor.id}}</td>
             <td>{{donor.org_name}}</td>
             <td>{{donor.location}}</td>
             <td>{{donor.year_donation}}</td>
@@ -113,7 +110,6 @@
         {% if sponsors_list %}
         <table id="sponsors" class="table">
           <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Service Provided</th>
             <th>Primary Contact ID</th>
@@ -121,7 +117,6 @@
           </tr>
           {% for sponsor in sponsors_list %}
           <tr>
-            <td>{{sponsor.id}}</td>
             <td>{{sponsor.name}}</td>
             <td>{{sponsor.service_provided}}</td>
             <td>{{sponsor.primary_contact_id}}</td>
@@ -140,7 +135,6 @@
         <table id="students" class="table">
           <tr>
             <th>Select</th>
-            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -154,7 +148,6 @@
           {% for student in students_list %}
           <tr>
             <td><input type="checkbox" name="checks" value={{student.email}}></td>
-            <td>{{student.id}}</td>
             <td>{{student.first_name}}</td>
             <td>{{student.last_name}}</td>
             <td>{{student.email}}</td>
@@ -178,7 +171,6 @@
         <table id="volunteers" class="table">
           <tr>
             <th>Select</th>
-            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -189,7 +181,6 @@
           {% for volunteer in volunteers_list %}
           <tr>
             <td><input type="checkbox" name="checks" value={{volunteer.email}}></td>
-            <td>{{volunteer.id}}</td>
             <td>{{volunteer.first_name}}</td>
             <td>{{volunteer.last_name}}</td>
             <td>{{volunteer.email}}</td>
@@ -203,20 +194,6 @@
         <p>No Volunteer data are available.</p>
         {% endif %}
       </div>
-    </div>
-    <div class="delete">
-      <h4>DELETE FROM</h4>
-      <select name="table">
-          <option value="contacts">Contacts</option>
-          <option value="donors">Donors</option>
-          <option value="sponsors">Sponsors</option>
-          <option value="students">Students</option>
-          <option value="volunteers">Volunteers</option>
-        </select><br>
-        <h4>WHERE ID =</h4>
-        <input type="text" name="id" value="" placeholder=""></input><br><br>
-        <button name="delete" class="btn btn-danger">DELETE</button>
-      <p><strong>NOTE:</strong> It takes few seconds for the database to update changes and may require refreshing the page after deleting entries.</p>
     </div>
     </form>
   </div>
