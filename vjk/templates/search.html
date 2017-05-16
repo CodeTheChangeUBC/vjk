@@ -51,10 +51,6 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Phone</th>
-            <th>Donor</th>
-            <th>Sponsor</th>
-            <th>Student</th>
-            <th>Volunteer</th>
           </tr>
           {% for contact in contacts_list %}
           <tr>
@@ -64,10 +60,6 @@
             <td>{{contact.last_name}}</td>
             <td>{{contact.email}}</td>
             <td>{{contact.phone}}</td>
-            <td>{{contact.donor}}</td>
-            <td>{{contact.sponsor}}</td>
-            <td>{{contact.student}}</td>
-            <td>{{contact.volunteer}}</td>
           </tr>
           {% endfor %}
         </table>
@@ -204,7 +196,7 @@
         {% endif %}
       </div>
     </div>
-    <div class="delete">
+    <!---<div class="delete">
       <h4>DELETE FROM</h4>
       <select name="table">
           <option value="contacts">Contacts</option>
@@ -219,6 +211,6 @@
       <p><strong>NOTE:</strong> It takes few seconds for the database to update changes and may require refreshing the page after deleting entries.</p>
     </div>
     </form>
-  </div>
+  </div>!-->
 </body>
 </html>
