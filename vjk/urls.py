@@ -6,5 +6,5 @@ app_name = 'vjk'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^search/', views.search, name='search'),
-    url(r'^email/', views.email, name='email'),
+    # url(r'^delete-entries/', views.delete, name='delete')
 ]
