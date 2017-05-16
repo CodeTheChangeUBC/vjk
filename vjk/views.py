@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader, Context
+from django.core import mail
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 
@@ -38,31 +39,26 @@ def search(request):
 			"students_list": students_list,
 			"volunteers_list": volunteers_list
 	    	}
-	return HttpResponse(template.render(context, request))
-
-
-
-def email(request):
-	return HttpResponse("send email to different people.")
-
-def delete(request):
-    if request.POST:
-        table = request.POST["table"]
-        id = request.POST["id"]
-        if table == "contacts":
-            row = Contacts.objects.get(pk = id)
-        elif table == "donors":
-            row = Donors.objects.get(pk = id)
-        elif table == "sponsors":
-            row = Sponsors.objects.get(pk = id)
-        elif table == "students":
-            row = Students.objects.get(pk = id)
-        elif table == "volunteers":
-            row = Volunteers.objects.get(pk = id)
-        row.delete()
-    template = loader.get_template("delete.html")
-    context = {
-        "table" : table,
-        "id" : id
-    }
-    return HttpResponse(template.render(context,request))
+	return render(request, "search.html", context)
+#
+# def delete(request):
+#     if request.POST:
+#         table = request.POST["table"]
+#         id = request.POST["id"]
+#         if table == "contacts":
+#             row = Contacts.objects.get(pk = id)
+#         elif table == "donors":
+#             row = Donors.objects.get(pk = id)
+#         elif table == "sponsors":
+#             row = Sponsors.objects.get(pk = id)
+#         elif table == "students":
+#             row = Students.objects.get(pk = id)
+#         elif table == "volunteers":
+#             row = Volunteers.objects.get(pk = id)
+#         row.delete()
+#     template = loader.get_template("delete.html")
+#     context = {
+#         "table" : table,
+#         "id" : id
+#     }
+#     return HttpResponse(template.render(context,request))
