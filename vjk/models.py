@@ -32,7 +32,7 @@ class Contact(models.Model):
 
 
 class Donor(models.Model):
-	org_name 			= models.CharField(max_length = 50)
+	org_name 			= models.CharField(max_length = 50, verbose_name="Organization Name")
 	location 			= models.CharField(max_length = 100, blank=True)
 	year_donation 		= models.IntegerField(verbose_name="Year", blank=True)
 	amount_donation 	= models.IntegerField(verbose_name="Amount Donated", blank=True)
