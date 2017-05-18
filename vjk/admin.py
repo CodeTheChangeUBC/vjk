@@ -49,7 +49,7 @@ class VolunteerAdmin(admin.ModelAdmin):
 		('Details', 	{'fields': ['email', 'phone', 'role', 'years_helped']}),
 	]
 	list_display 	= ('first_name','last_name','email',
-					'email', 'phone', 'role', 'years_helped')
+						'phone', 'role', 'years_helped')
 	list_filter 	= ['first_name']
 	search_fields 	= ['first_name','last_name','email', 'phone']
 
