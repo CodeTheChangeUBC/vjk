@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/python,django
 
 ### Django ###
@@ -11,6 +10,12 @@ db.sqlite3
 .tox/
 __pycache__
 media
+
+### Heroku ###
+venv
+*.pyc
+staticfiles
+.env
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
