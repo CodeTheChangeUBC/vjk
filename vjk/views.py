@@ -7,14 +7,13 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Contact, Donor, Sponsor, Student, Volunteer
 
-@login_required(login_url='/login/', redirect_field_name='redirect')
+@login_required(login_url='/admin/login/', redirect_field_name='redirect')
 def index(request):
 	contacts_list = Contact.objects.all()
 	donors_list = Donor.objects.all()
 	sponsors_list = Sponsor.objects.all()
 	students_list = Student.objects.all()
 	volunteers_list = Volunteer.objects.all()
-	#template = loader.get_template("search.html")
 	context = {
             "request": request,
 	        "contacts_list": contacts_list,
