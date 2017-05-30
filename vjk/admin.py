@@ -1,4 +1,11 @@
 from django.contrib import admin
+#from django.contrib.auth.models import User
+#from django.contrib.sites.models import Site
+from django.contrib.auth.models import Group
+
+#admin.site.unregister(User)
+admin.site.unregister(Group)
+#admin.site.unregister(Site)
 
 from .models import Contact, Donor, Sponsor, Student, Volunteer
 
@@ -68,6 +75,7 @@ admin.site.register(Donor, DonorAdmin)
 admin.site.register(Sponsor, SponsorAdmin)
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Volunteer, VolunteerAdmin)
+
 
 
 
