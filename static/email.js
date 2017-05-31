@@ -11,6 +11,25 @@ $(document).ready(function(){
       var str = arr.toString();
       copyToClipboard(str);
   })
+
+  $("#selectAllContacts").on("click", function() {
+    var checkedStatus = this.checked;
+    $('#contacts-div').find('td:first :checkbox').each(function() {
+      $(this).prop('checked', checkedStatus);
+    });
+  })
+  $("#selectAllStudents").on("click", function() {
+    var checkedStatus = this.checked;
+    $('#students-div').find('td:first :checkbox').each(function() {
+      $(this).prop('checked', checkedStatus);
+    });
+  })
+  $("#selectAllVoluteers").on("click", function() {
+    var checkedStatus = this.checked;
+    $('#volunteers-div').find('input:checkbox[name=]').each(function() {
+      $(this).prop('checked', checkedStatus);
+    });
+  })
 });
 
 function copyToClipboard(text) {

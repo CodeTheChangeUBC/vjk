@@ -49,7 +49,7 @@
         {% if contacts_list %}
         <table id="contacts" class="table">
           <tr>
-            <th>Select</th>
+            <th>(Un)Select All<br><input type="checkbox" name="selectAllContacts"></input></th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -57,7 +57,7 @@
           </tr>
           {% for contact in contacts_list %}
           <tr>
-            <td><input type="checkbox" name="checks" value={{contact.email}}></td>
+            <td><input type="checkbox" name="checks" value={{contact.email}}></input></td>
             <td>{{contact.first_name}}</td>
             <td>{{contact.last_name}}</td>
             <td>{{contact.email}}</td>
@@ -129,7 +129,7 @@
         {% if students_list %}
         <table id="students" class="table">
           <tr>
-            <th>Select</th>
+            <th>(Un)Select All<br><input id="student" type="checkbox" name="selectAllStudents"></input></th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -165,7 +165,7 @@
         {% if volunteers_list %}
         <table id="volunteers" class="table">
           <tr>
-            <th>Select</th>
+            <th>(Un)Select All<br><input id="volunteer" type="checkbox" name="selectAllVolunteers"></input></th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
