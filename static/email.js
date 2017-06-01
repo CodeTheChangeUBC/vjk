@@ -10,26 +10,36 @@ $(document).ready(function(){
       // Array to String
       var str = arr.toString();
       copyToClipboard(str);
-  })
-
+  });
   $("#selectAllContacts").on("click", function() {
-    var checkedStatus = this.checked;
-    $('#contacts-div').find('td:first :checkbox').each(function() {
-      $(this).prop('checked', checkedStatus);
-    });
-  })
+    toggle(this);
+  });
   $("#selectAllStudents").on("click", function() {
-    var checkedStatus = this.checked;
-    $('#students-div').find('td:first :checkbox').each(function() {
-      $(this).prop('checked', checkedStatus);
-    });
-  })
-  $("#selectAllVoluteers").on("click", function() {
-    var checkedStatus = this.checked;
-    $('#volunteers-div').find('input:checkbox[name=]').each(function() {
-      $(this).prop('checked', checkedStatus);
-    });
-  })
+    toggle(this);
+  });
+  $("#selectAllVolunteers").on("click", function() {
+    toggle(this);
+  });
+  function toggle(source) {
+    var sourceStatus = source.checked;
+    var sourceID = source.id;
+    if (sourceID == "selectAllContacts") {
+      $(".checkboxContact").each(function() {
+        $(this).prop("checked", sourceStatus);
+      });
+    } else if (sourceID == "selectAllStudents") {
+      $(".checkboxStudent").each(function() {
+        $(this).prop("checked", sourceStatus);
+      });
+    } else if (sourceID == "selectAllVolunteers") {
+      $(".checkboxVolunteer").each(function() {
+        $(this).prop("checked", sourceStatus);
+      });
+    } else {
+
+    }
+  }
+
 });
 
 function copyToClipboard(text) {
