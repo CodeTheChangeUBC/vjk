@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vjk_test',
-        'HOST': 'vjk-test.c9vzvqoxblsh.us-west-2.rds.amazonaws.com',
+        'NAME': 'sgxz9yby1f483xrj',
+        'HOST': 'mgs0iaapcj3p9srz.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         'PORT':'3306',
-        'USER':'ctc_vjk',
-        'PASSWORD': 'codethechange'
+        'USER':'ydds8bnas204qexm',
+        'PASSWORD': 'mfvcdufw7dgh31j3'
     }
 }
 
