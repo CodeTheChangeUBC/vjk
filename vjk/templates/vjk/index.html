@@ -38,7 +38,8 @@
     </select>
     <input id="submit" type="button" class="btn" value="Search"></input>
     <br><br>
-    <input id="download" type="button" class="btn" value="Copy Selected Email Addresses"></input>
+    <input id="download" type="button" class="btn" value="Copy Selected Email Addresses"></input><br><br>
+    <input id="selectEverything" type="button" class="btn" value="Select All Email Addresses"></input>
     <hr>
     <div class="all">
         {% csrf_token %}
@@ -54,8 +55,8 @@
             <th>Phone</th>
           </tr>
           {% for contact in contacts_list %}
-          <tr class="contactRow">
-            <td><input class="checkboxContact" type="checkbox" name="checks" value={{contact.email}}></input></td>
+          <tr id="contact{{contact.id}}Row" class="contactRow">
+            <td><input id="contact{{contact.id}}" class="checkboxContact" type="checkbox" name="checks" value={{contact.email}}></input></td>
             <td>{{contact.first_name}}</td>
             <td>{{contact.last_name}}</td>
             <td>{{contact.email}}</td>
@@ -139,8 +140,8 @@
             <th>Ref. Email</th>
           </tr>
           {% for student in students_list %}
-          <tr class="studentRow">
-            <td><input class="checkboxStudent" type="checkbox" name="checks" value={{student.email}}></td>
+          <tr id="student{{student.id}}Row" class="studentRow">
+            <td><input id="student{{student.id}}" class="checkboxStudent" type="checkbox" name="checks" value={{student.email}}></td>
             <td>{{student.first_name}}</td>
             <td>{{student.last_name}}</td>
             <td>{{student.email}}</td>
@@ -172,8 +173,8 @@
             <th>Years Helped</th>
           </tr>
           {% for volunteer in volunteers_list %}
-          <tr class="volunteerRow">
-            <td><input class="checkboxVolunteer" type="checkbox" name="volun" value={{volunteer.email}}></td>
+          <tr id="volunteer{{volunteer.id}}Row" class="volunteerRow">
+            <td><input id="volunteer{{volunteer.id}}" class="checkboxVolunteer" type="checkbox" name="volun" value={{volunteer.email}}></td>
             <td>{{volunteer.first_name}}</td>
             <td>{{volunteer.last_name}}</td>
             <td>{{volunteer.email}}</td>

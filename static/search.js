@@ -8,7 +8,6 @@ $(document).ready(function(){
     }
   });
   function initiateSearch() {
-    console.log("clicked");
     var tbl = $("#table").val();
     var inpt = $("#input").val();
     var fild = $("#field").val();
