@@ -39,7 +39,7 @@
     <input id="submit" type="button" class="btn" value="Search"></input>
     <br><br>
     <input id="download" type="button" class="btn" value="Copy Selected Email Addresses"></input><br><br>
-    <input id="selectEverything" type="button" class="btn" value="Select All Email Addresses"></input>
+    <input id="selectEverything" type="button" class="btn" value="Select All Email Addresses (All Tables)"></input>
     <hr>
     <div class="all">
         {% csrf_token %}
@@ -48,7 +48,7 @@
         {% if contacts_list %}
         <table id="contacts" class="table">
           <tr>
-            <th>(Un)Select All<br><input type="checkbox" id="selectAllContacts"></input></th>
+            <th>Select All<br><input type="checkbox" id="selectAllContacts"></input></th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -128,7 +128,7 @@
         {% if students_list %}
         <table id="students" class="table">
           <tr>
-            <th>(Un)Select All<br><input type="checkbox" id="selectAllStudents"></input></th>
+            <th>Select All<br><input type="checkbox" id="selectAllStudents"></input></th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -164,7 +164,7 @@
         {% if volunteers_list %}
         <table id="volunteers" class="table">
           <tr>
-            <th>(Un)Select All<br><input type="checkbox" id="selectAllVolunteers"></input></th>
+            <th>Select All<br><input type="checkbox" id="selectAllVolunteers"></input></th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
