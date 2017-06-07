@@ -26,9 +26,9 @@ $(document).ready(function(){
   function searchByFilter(table, input, field) {
     // 0 is a temporary number and should be replaced.
     var column_num;
-    var index = 0;
+    var lookAtHeader = true;
     $("#"+table+" tr").each(function() {
-      if (index == 0) {
+      if (lookAtHeader) {
         var lgth = $(this).find("th").length;
         for (var i=0; i<lgth;i++) {
           var column = $(this).find("th").eq(i).html();
@@ -37,11 +37,9 @@ $(document).ready(function(){
             break;
           }
         }
-        index++;
+        lookAtHeader = false;
       } else {
         var val = $(this).find("td").eq(column_num).html();
-        console.log(val);
-        console.log(input);
         if (val == input) {
           $(this).show();
         } else {
@@ -58,12 +56,12 @@ $(document).ready(function(){
       if (index != 0) {
         var lgth = $(this).find("td").length;
         var bool = false;
-        for (var i=1; i < lgth; i++) {
+        for (var i=0; i < lgth; i++) {
           var val = $(this).find("td").eq(i).html();
           if (val == input) { bool = true; }
         }
         if (bool) { $(this).show(); }
-        else { $(this).hide(); }
+        else {$(this).hide();}
       }
       index++;
     })
