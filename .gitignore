@@ -10,6 +10,7 @@ db.sqlite3
 .tox/
 __pycache__
 media
+vjk/migrations
 
 ### Heroku ###
 venv
