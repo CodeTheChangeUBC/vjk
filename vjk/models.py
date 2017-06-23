@@ -7,8 +7,8 @@ class Contact(models.Model):
 	last_name 	= models.CharField(max_length = 75)
 	email 		= models.EmailField()
 
-	phone_regex = RegexValidator(regex=r'^\+?1?\d{10,15}$',
-					message="Phone number must be entered in the format: '+16045555555'. Up to 15 digits allowed.")
+	phone_regex = RegexValidator(regex=r'^\+?1?\d{10,10}$',
+					message="Phone number must be entered in the format: '+16045555555'.")
 	phone 		= models.CharField(validators=[phone_regex],max_length = 20)
 
 
