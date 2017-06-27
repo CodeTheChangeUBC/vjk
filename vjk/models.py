@@ -100,7 +100,7 @@ class Student(models.Model):
 	phone_number 		= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True)
 
 	program_city 		= models.CharField(max_length = 100, blank=True, null=True)
-	year_attended 		= models.IntegerField()
+	year_attended 		= models.IntegerField(blank=True,null=True)
 	program_institution = models.CharField(max_length = 75, blank=True, null=True)
 
 	address_line1 = models.CharField(max_length = 50, blank=True, null=True)
@@ -113,7 +113,7 @@ class Student(models.Model):
 										verbose_name="Reference First Name")
 	reference_lname 	= models.CharField(max_length=75,default="",
 										verbose_name="Reference Last Name")
-	reference_email 	= models.EmailField(default="")
+	reference_email 	= models.EmailField(default="", verbose_name='Reference Email')
 	reference_number 	= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True)
 
 	reference_address_line1 = models.CharField(max_length = 50, blank=True, null=True)
