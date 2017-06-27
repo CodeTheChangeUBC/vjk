@@ -1,16 +1,37 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
+province_choices = {
+	('AB','Alberta'),
+	('BC','British Columbia'),
+	('SK','Saskatchewan'),
+	('MB','Manitoba'),
+	('ON','Ontario'),
+	('QC','Quebec'),
+	('PE','Prince Edward Island'),
+	('NS','Nova Scotia'),
+	('NL','Newfoundland and Labrador'),
+	('NB','New Brunswick'),
+	('NT','Northwest Territories'),
+	('NU','Nunavut'),
+	('YT','Yukon')
+}
+
+phone_regex = RegexValidator(regex=r'^\+?1?\d{10,12}$',
+				message="Phone number must be entered in the format: '+16045555555'.")
+
 # Create your models here.
 class Contact(models.Model):
-	first_name 	= models.CharField(max_length = 75)
-	last_name 	= models.CharField(max_length = 75)
-	email 		= models.EmailField()
+	first_name 		= models.CharField(max_length = 75)
+	last_name 		= models.CharField(max_length = 75)
+	email 			= models.EmailField()
+	phone_number 	= models.CharField(validators=[phone_regex],max_length = 12)
 
-	phone_regex = RegexValidator(regex=r'^\+?1?\d{10,10}$',
-					message="Phone number must be entered in the format: '+16045555555'.")
-	phone 		= models.CharField(validators=[phone_regex],max_length = 20)
-
+	address_line1 = models.CharField(max_length = 50, blank=True, null=True)
+	address_line2 = models.CharField(max_length = 50, blank=True, null=True)
+	city = models.CharField(max_length = 30, blank=True, null=True)
+	province = models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
+	postal_code = models.CharField(max_length=6, blank=True, null=True)
 
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
@@ -75,14 +96,31 @@ class Student(models.Model):
 	first_name 			= models.CharField(max_length = 75)
 	last_name 			= models.CharField(max_length = 75)
 	email 				= models.EmailField()
-	location 			= models.CharField(max_length = 100, blank=True, null=True)
 	school 				= models.CharField(max_length = 75, blank=True, null=True)
-	year_attended 		= models.IntegerField()
+	phone_number 		= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True)
+
+	program_city 		= models.CharField(max_length = 100, blank=True, null=True)
+	year_attended 		= models.IntegerField(blank=True,null=True)
+	program_institution = models.CharField(max_length = 75, blank=True, null=True)
+
+	address_line1 = models.CharField(max_length = 50, blank=True, null=True)
+	address_line2 = models.CharField(max_length = 50, blank=True, null=True)
+	city = models.CharField(max_length = 30, blank=True, null=True)
+	province = models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
+	postal_code = models.CharField(max_length=6, blank=True, null=True)
+
 	reference_fname 	= models.CharField(max_length=75,default="",
 										verbose_name="Reference First Name")
 	reference_lname 	= models.CharField(max_length=75,default="",
 										verbose_name="Reference Last Name")
-	reference_email 	= models.EmailField(default="")
+	reference_email 	= models.EmailField(default="", verbose_name='Reference Email')
+	reference_number 	= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True)
+
+	reference_address_line1 = models.CharField(max_length = 50, blank=True, null=True)
+	reference_address_line2 = models.CharField(max_length = 50, blank=True, null=True)
+	reference_city = models.CharField(max_length = 30, blank=True, null=True)
+	reference_province = models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
+	reference_postal_code = models.CharField(max_length=6, blank=True, null=True)
 
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
@@ -92,11 +130,14 @@ class Volunteer(models.Model):
 	first_name 			= models.CharField(max_length = 75)
 	last_name 			= models.CharField(max_length = 75)
 	email 				= models.EmailField()
+	phone_number 		= models.CharField(validators=[phone_regex],max_length = 12, blank=True, null=True)
 
-	phone_regex = RegexValidator(regex=r'^\+?1?\d{10,10}$',
-					message="Phone number must be entered in the format: '+16045555555'.")
-	phone 		= models.CharField(validators=[phone_regex],max_length = 20)
-	
+	address_line1 = models.CharField(max_length = 50, blank=True, null=True)
+	address_line2 = models.CharField(max_length = 50, blank=True, null=True)
+	city = models.CharField(max_length = 30, blank=True, null=True)
+	province = models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
+	postal_code = models.CharField(max_length=6, blank=True, null=True)
+
 	role 				= models.CharField(max_length = 75, blank=True, null=True)
 	years_helped 		= models.CharField(max_length=75,default="", blank=True, null=True)
 
