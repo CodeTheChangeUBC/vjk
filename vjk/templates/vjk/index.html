@@ -132,12 +132,25 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
-            <th>Location</th>
+            <th>Phone Number</th>
+            <th>Program City</th>
             <th>School</th>
+            <th>Program Institution</th>
             <th>Year Attended</th>
+            <th>Address Line 1</th>
+            <th>Address Line 2</th>
+            <th>City</th>
+            <th>Province</th>
+            <th>Postal Code</th>
             <th>Ref. First Name</th>
             <th>Ref. Last Name</th>
             <th>Ref. Email</th>
+            <th>Ref. Address Line 1</th>
+            <th>Ref. Address Line 2</th>
+            <th>Ref. City</th>
+            <th>Ref. Number</th>
+            <th>Ref. Postal Code</th>
+            <th>Ref. Province</th>
           </tr>
           {% for student in students_list %}
           <tr id="student{{student.id}}Row" class="studentRow">
@@ -145,12 +158,25 @@
             <td>{{student.first_name}}</td>
             <td>{{student.last_name}}</td>
             <td>{{student.email}}</td>
-            <td>{{student.location}}</td>
+            <td>{{student.phone_number}}</td>
+            <td>{{student.program_city}}</td>
             <td>{{student.school}}</td>
+            <td>{{student.program_institution}}</td>
             <td>{{student.year_attended}}</td>
+            <td>{{student.address_line1}}</td>
+            <td>{{student.address_line2}}</td>
+            <td>{{student.city}}</td>
+            <td>{{student.province}}</td>
+            <td>{{student.postal_code}}</td>
             <td>{{student.reference_fname}}</td>
             <td>{{student.reference_lname}}</td>
             <td>{{student.reference_email}}</td>
+            <td>{{student.reference_address_line1}}</td>
+            <td>{{student.reference_address_line2}}</td>
+            <td>{{student.reference_city}}</td>
+            <td>{{student.reference_number}}</td>
+            <td>{{student.reference_postal_code}}</td>
+            <td>{{student.referece_province}}</td>
           </tr>
           {% endfor %}
         </table>
