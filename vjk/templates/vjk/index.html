@@ -53,6 +53,11 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Address Line 1</th>
+            <th>Address Line 2</th>
+            <th>City</th>
+            <th>Postal Code</th>
+            <th>Province</th>
           </tr>
           {% for contact in contacts_list %}
           <tr id="contact{{contact.id}}Row" class="contactRow">
@@ -60,7 +65,12 @@
             <td>{{contact.first_name}}</td>
             <td>{{contact.last_name}}</td>
             <td>{{contact.email}}</td>
-            <td>{{contact.phone}}</td>
+            <td>{{contact.phone_number}}</td>
+            <td>{{contact.address_line1}}</td>
+            <td>{{contact.address_line2}}</td>
+            <td>{{contact.city}}</td>
+            <td>{{contact.postal_code}}</td>
+            <td>{{contact.province}}</td>
           </tr>
           {% endfor %}
         </table>
@@ -78,9 +88,9 @@
             <th>Org Name</th>
             <th>Location</th>
             <th>Year Donated</th>
-            <th>Amount donated</th>
-            <th>Primary Contact</th>
-            <th>Secondary Contact</th>
+            <th>Amount Donated</th>
+            <th>Primary Contact ID</th>
+            <th>Secondary Contact ID</th>
           </tr>
           {% for donor in donors_list %}
           <tr class="donorRow">
@@ -88,8 +98,8 @@
             <td>{{donor.location}}</td>
             <td>{{donor.year_donation}}</td>
             <td>{{donor.amount_donation}}</td>
-            <td>{{donor.primary_contact}}</td>
-            <td>{{donor.secondary_contact}}</td>
+            <td>{{donor.primary_contact_id}}</td>
+            <td>{{donor.secondary_contact_id}}</td>
           </tr>
           {% endfor %}
         </table>
@@ -98,7 +108,6 @@
         {% endif %}
         <hr>
       </div>
-      <!-- Change in DB? -->
       <div class="sponsors-div" hidden>
         <h3>Sponsors</h3>
         {% if sponsors_list %}
@@ -150,7 +159,7 @@
             <th>Ref. City</th>
             <th>Ref. Number</th>
             <th>Ref. Postal Code</th>
-            <th>Ref. Province</th>
+            <th>Ref. Province </th>
           </tr>
           {% for student in students_list %}
           <tr id="student{{student.id}}Row" class="studentRow">
@@ -197,6 +206,11 @@
             <th>Phone</th>
             <th>Role</th>
             <th>Years Helped</th>
+            <th>Address Line 1</th>
+            <th>Address Line 2</th>
+            <th>City</th>
+            <th>Postal Code</th>
+            <th>Province</th>
           </tr>
           {% for volunteer in volunteers_list %}
           <tr id="volunteer{{volunteer.id}}Row" class="volunteerRow">
@@ -204,9 +218,14 @@
             <td>{{volunteer.first_name}}</td>
             <td>{{volunteer.last_name}}</td>
             <td>{{volunteer.email}}</td>
-            <td>{{volunteer.phone}}</td>
+            <td>{{volunteer.phone_number}}</td>
             <td>{{volunteer.role}}</td>
             <td>{{volunteer.years_helped}}</td>
+            <td>{{volunteer.address_line1}}</td>
+            <td>{{volunteer.address_line2}}</td>
+            <td>{{volunteer.city}}</td>
+            <td>{{volunteer.postal_code}}</td>
+            <td>{{volunteer.province}}</td>
           </tr>
           {% endfor %}
         </table>
