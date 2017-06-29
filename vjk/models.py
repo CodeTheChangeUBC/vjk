@@ -27,11 +27,11 @@ class Contact(models.Model):
 	email 			= models.EmailField()
 	phone_number 	= models.CharField(validators=[phone_regex],max_length = 12, blank=True, null=True)
 
-	address_line1 = models.CharField(max_length = 50, blank=True, null=True)
-	address_line2 = models.CharField(max_length = 50, blank=True, null=True)
-	city = models.CharField(max_length = 30, blank=True, null=True)
-	province = models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
-	postal_code = models.CharField(max_length=6, blank=True, null=True)
+	address_line1 	= models.CharField(max_length = 50, blank=True, null=True)
+	address_line2 	= models.CharField(max_length = 50, blank=True, null=True)
+	city 			= models.CharField(max_length = 30, blank=True, null=True)
+	province 		= models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
+	postal_code 	= models.CharField(max_length=6, blank=True, null=True)
 
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
@@ -103,11 +103,11 @@ class Student(models.Model):
 	year_attended 		= models.IntegerField(blank=True,null=True)
 	program_institution = models.CharField(max_length = 75, blank=True, null=True)
 
-	address_line1 = models.CharField(max_length = 50, blank=True, null=True)
-	address_line2 = models.CharField(max_length = 50, blank=True, null=True)
-	city = models.CharField(max_length = 30, blank=True, null=True)
-	province = models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
-	postal_code = models.CharField(max_length=6, blank=True, null=True)
+	address_line1 	= models.CharField(max_length = 50, blank=True, null=True)
+	address_line2 	= models.CharField(max_length = 50, blank=True, null=True)
+	city 			= models.CharField(max_length = 30, blank=True, null=True)
+	province 		= models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
+	postal_code 	= models.CharField(max_length=6, blank=True, null=True)
 
 	reference_fname 	= models.CharField(max_length=75,default="",
 										verbose_name="Reference First Name")
@@ -118,9 +118,9 @@ class Student(models.Model):
 
 	reference_address_line1 = models.CharField(max_length = 50, blank=True, null=True)
 	reference_address_line2 = models.CharField(max_length = 50, blank=True, null=True)
-	reference_city = models.CharField(max_length = 30, blank=True, null=True)
-	reference_province = models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
-	reference_postal_code = models.CharField(max_length=6, blank=True, null=True)
+	reference_city 			= models.CharField(max_length = 30, blank=True, null=True)
+	reference_province 		= models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
+	reference_postal_code 	= models.CharField(max_length=6, blank=True, null=True)
 
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
@@ -132,14 +132,23 @@ class Volunteer(models.Model):
 	email 				= models.EmailField()
 	phone_number 		= models.CharField(validators=[phone_regex],max_length = 12, blank=True, null=True)
 
-	address_line1 = models.CharField(max_length = 50, blank=True, null=True)
-	address_line2 = models.CharField(max_length = 50, blank=True, null=True)
-	city = models.CharField(max_length = 30, blank=True, null=True)
-	province = models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
-	postal_code = models.CharField(max_length=6, blank=True, null=True)
+	address_line1 		= models.CharField(max_length = 50, blank=True, null=True)
+	address_line2 		= models.CharField(max_length = 50, blank=True, null=True)
+	city 				= models.CharField(max_length = 30, blank=True, null=True)
+	province 			= models.CharField(max_length = 20, choices = province_choices, blank=True, null=True)
+	postal_code 		= models.CharField(max_length=6, blank=True, null=True)
 
 	role 				= models.CharField(max_length = 75, blank=True, null=True)
 	years_helped 		= models.CharField(max_length=75,default="", blank=True, null=True)
 
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
+
+class Contribution(models.Model):
+	year				= models.IntegerField(blank=True, null=True)
+	sponsor_id			= models.ForeignKey(Sponsor, on_delete=models.PROTECT, blank=True, null=True)
+	donor_id			= models.ForeignKey(Donor, on_delete=models.PROTECT, blank=True, null=True)
+	volunteer_id		= models.ForeignKey(Volunteer, on_delete=models.PROTECT, blank=True, null=True)
+	amount_contributed	= models.IntegerField(blank=True, null=True)
+	service_provided	= models.TextField(blank=True, null=True)
+	volunteer_hours		= models.IntegerField(blank=True, null=True)
