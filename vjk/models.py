@@ -146,9 +146,9 @@ class Volunteer(models.Model):
 
 class Contribution(models.Model):
 	year				= models.IntegerField(blank=True, null=True)
-	sponsor_id			= models.ForeignKey(Sponsor, on_delete=models.PROTECT, blank=True, null=True)
-	donor_id			= models.ForeignKey(Donor, on_delete=models.PROTECT, blank=True, null=True)
-	volunteer_id		= models.ForeignKey(Volunteer, on_delete=models.PROTECT, blank=True, null=True)
+	sponsor				= models.ForeignKey(Sponsor, on_delete=models.PROTECT, blank=True, null=True)
+	donor				= models.ForeignKey(Donor, on_delete=models.PROTECT, blank=True, null=True)
+	volunteer			= models.ForeignKey(Volunteer, on_delete=models.PROTECT, blank=True, null=True)
 	amount_contributed	= models.IntegerField(blank=True, null=True)
 	service_provided	= models.TextField(blank=True, null=True)
 	volunteer_hours		= models.IntegerField(blank=True, null=True)
