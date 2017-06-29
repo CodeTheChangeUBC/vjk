@@ -25,7 +25,7 @@ class Contact(models.Model):
 	first_name 		= models.CharField(max_length = 75)
 	last_name 		= models.CharField(max_length = 75)
 	email 			= models.EmailField()
-	phone_number 	= models.CharField(validators=[phone_regex],max_length = 12)
+	phone_number 	= models.CharField(validators=[phone_regex],max_length = 12, blank=True, null=True)
 
 	address_line1 = models.CharField(max_length = 50, blank=True, null=True)
 	address_line2 = models.CharField(max_length = 50, blank=True, null=True)
