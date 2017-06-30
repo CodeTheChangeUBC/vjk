@@ -3,7 +3,7 @@ from django.contrib.auth.models import Group
 
 admin.site.unregister(Group)
 
-from .models import Contact, Donor, Sponsor, Student, Volunteer
+from .models import Contact, Donor, Sponsor, Student, Volunteer, Contribution
 
 class DonorAdmin(admin.ModelAdmin):
 	fieldsets = [
@@ -71,8 +71,20 @@ class ContactAdmin(admin.ModelAdmin):
 	list_filter 	= ['first_name']
 	search_fields 	= ['first_name', 'last_name', 'email']
 
+class ContributionAdmin(admin.ModelAdmin):
+	fieldsets = [
+		(None, {'fields': ['year', 'sponsor', 'donor', 'volunteer',
+						'amount_contributed','service_provided', 'volunteer_hours']})
+	]
+
+	list_display 	= ('year', 'sponsor', 'donor', 'volunteer',
+					'amount_contributed','service_provided', 'volunteer_hours')
+	list_filter 	= ['year']
+	search_fields 	= ['year', 'sponsor', 'donor', 'volunteer']
+
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(Donor, DonorAdmin)
 admin.site.register(Sponsor, SponsorAdmin)
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Volunteer, VolunteerAdmin)
+admin.site.register(Contribution, ContributionAdmin)
