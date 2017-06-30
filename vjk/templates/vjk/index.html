@@ -25,6 +25,7 @@
         <option value="sponsors">Sponsors</option>
         <option value="students">Students</option>
         <option value="volunteers">Volunteers</option>
+        <option value="contributions">Contributions</option>
       </select>
     </h3>
     <input id="input" type="text" placeholder="Search" onsubmit="initiateSearch">
@@ -116,6 +117,36 @@
         </table>
         {% else %}
         <p>No Sponsor data are available.</p>
+        {% endif %}
+        <hr>
+      </div>
+      <div class="contributions-div" hidden>
+        <h3>Contributions</h3>
+        {% if contributions_list %}
+        <table id="contributions" class="table">
+          <tr>
+            <th>Year</th>
+            <th>Sponsor</th>
+            <th>Donor</th>
+            <th>Volunteer</th>
+            <th>Amount Contributed</th>
+            <th>Service Provided</th>
+            <th>Volunteer Hours</th>
+          </tr>
+          {% for contribution in contributions_list %}
+          <tr class="contributionRow">
+            <td>{{contribution.year}}</td>
+            <td>{{contribution.sponsor}}</td>
+            <td>{{contribution.donor}}</td>
+            <td>{{contribution.volunteer}}</td>
+            <td>{{contribution.amount_contributed}}</td>
+            <td>{{contribution.service_provided}}</td>
+            <td>{{contribution.volunteer_hours}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>No Contribution data are available.</p>
         {% endif %}
         <hr>
       </div>

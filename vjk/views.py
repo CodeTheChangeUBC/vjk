@@ -5,7 +5,7 @@ from django.core import mail
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 
-from .models import Contact, Donor, Sponsor, Student, Volunteer
+from .models import Contact, Donor, Sponsor, Student, Volunteer, Contribution
 
 @login_required(login_url='/admin/login/', redirect_field_name='redirect')
 def index(request):
@@ -32,7 +32,5 @@ def index(request):
 			"student_fields": student_fields,
 			"volunteers": volunteers,
 			"volunteer_fields": volunteer_fields,
-	    	}
+	 }
 	return render(request, 'vjk/index.html', context)
-    
-
