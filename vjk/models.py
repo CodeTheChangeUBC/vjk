@@ -55,6 +55,9 @@ class Contact(models.Model):
 		return result
 		organization.short_description = "Contact For?"
 
+	def attrs(self):
+		return 
+
 
 class Donor(models.Model):
 	org_name 			= models.CharField(max_length = 50, verbose_name="Organization Name")

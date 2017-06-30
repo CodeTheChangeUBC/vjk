@@ -9,18 +9,29 @@ from .models import Contact, Donor, Sponsor, Student, Volunteer
 
 @login_required(login_url='/admin/login/', redirect_field_name='redirect')
 def index(request):
-	contacts_list = Contact.objects.all()
-	donors_list = Donor.objects.all()
-	sponsors_list = Sponsor.objects.all()
-	students_list = Student.objects.all()
-	volunteers_list = Volunteer.objects.all()
+	contacts	 	= Contact.objects.values();
+	contact_fields 	= Contact._meta.get_fields()[5:]
+	donors 			= Donor.objects.values();
+	donor_fields 	= Donor._meta.get_fields()[1:]
+	sponsors 		= Sponsor.objects.values();
+	sponsor_fields 	= Sponsor._meta.get_fields()[1:]
+	students 		= Student.objects.values()
+	student_fields 	= Student._meta.get_fields()[1:]
+	volunteers 		= Volunteer.objects.values()
+	volunteer_fields= Volunteer._meta.get_fields()[1:]
+
 	context = {
             "request": request,
-	        "contacts_list": contacts_list,
-			"donors_list": donors_list,
-			"sponsors_list": sponsors_list,
-			"students_list": students_list,
-			"volunteers_list": volunteers_list
+	        "contacts": contacts,
+	        "contact_fields" : contact_fields,
+			"donors": donors,
+			"donor_fields": donor_fields,
+			"sponsors": sponsors,
+			"sponsor_fields": sponsor_fields,
+			"students": students,
+			"student_fields": student_fields,
+			"volunteers": volunteers,
+			"volunteer_fields": volunteer_fields,
 	    	}
 	return render(request, 'vjk/index.html', context)
     

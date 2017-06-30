@@ -45,32 +45,22 @@
         {% csrf_token %}
       <div class="contacts-div">
         <h3>Contacts</h3>
-        {% if contacts_list %}
+        {% if contacts %}
         <table id="contacts" class="table">
           <tr>
             <th>Select All<br><input type="checkbox" id="selectAllContacts"></input></th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address Line 1</th>
-            <th>Address Line 2</th>
-            <th>City</th>
-            <th>Postal Code</th>
-            <th>Province</th>
+            {% for field in contact_fields %}
+              <th>{{ field.verbose_name }}</th>
+            {% endfor %}
           </tr>
-          {% for contact in contacts_list %}
+          {% for contact in contacts %}
           <tr id="contact{{contact.id}}Row" class="contactRow">
             <td><input id="contact{{contact.id}}" class="checkboxContact" type="checkbox" name="checks" value={{contact.email}}></input></td>
-            <td>{{contact.first_name}}</td>
-            <td>{{contact.last_name}}</td>
-            <td>{{contact.email}}</td>
-            <td>{{contact.phone_number}}</td>
-            <td>{{contact.address_line1}}</td>
-            <td>{{contact.address_line2}}</td>
-            <td>{{contact.city}}</td>
-            <td>{{contact.postal_code}}</td>
-            <td>{{contact.province}}</td>
+            {% for field,value in contact.items %}
+              {% if field != "id" %}
+              <td>{{ value }}</td>
+              {% endif %}
+            {% endfor %}
           </tr>
           {% endfor %}
         </table>
@@ -82,24 +72,20 @@
 
       <div class="donors-div" hidden>
         <h3>Donors</h3>
-        {% if donors_list %}
+        {% if donors %}
         <table id="donors" class="table">
           <tr>
-            <th>Org Name</th>
-            <th>Location</th>
-            <th>Year Donated</th>
-            <th>Amount Donated</th>
-            <th>Primary Contact ID</th>
-            <th>Secondary Contact ID</th>
+            {% for field in donor_fields %}
+              <th>{{ field.verbose_name }}</th>
+            {% endfor %}
           </tr>
-          {% for donor in donors_list %}
+          {% for donor in donors %}
           <tr class="donorRow">
-            <td>{{donor.org_name}}</td>
-            <td>{{donor.location}}</td>
-            <td>{{donor.year_donation}}</td>
-            <td>{{donor.amount_donation}}</td>
-            <td>{{donor.primary_contact_id}}</td>
-            <td>{{donor.secondary_contact_id}}</td>
+            {% for field,value in donor.items %}
+              {% if field != "id" %}
+              <td>{{ value }}</td>
+              {% endif %}
+            {% endfor %}
           </tr>
           {% endfor %}
         </table>
@@ -110,20 +96,21 @@
       </div>
       <div class="sponsors-div" hidden>
         <h3>Sponsors</h3>
-        {% if sponsors_list %}
+        {% if sponsors %}
         <table id="sponsors" class="table">
           <tr>
-            <th>Name</th>
-            <th>Service Provided</th>
-            <th>Primary Contact ID</th>
-            <th>Secondary Contact ID</th>
+            {% for field in sponsor_fields %}
+              <th>{{ field.verbose_name }}</th>
+            {% endfor %}
           </tr>
-          {% for sponsor in sponsors_list %}
+          {% for sponsor in sponsors %}
           <tr class="sponsorRow">
-            <td>{{sponsor.name}}</td>
-            <td>{{sponsor.service_provided}}</td>
-            <td>{{sponsor.primary_contact_id}}</td>
-            <td>{{sponsor.secondary_contact_id}}</td>
+            {% for field,value in sponsor.items %}
+              {% if field != "id" %}
+              <td>{{ value }}</td>
+              {% endif %}
+            {% endfor %}
+
           </tr>
           {% endfor %}
         </table>
@@ -134,58 +121,24 @@
       </div>
       <div class="students-div" hidden>
         <h3>Students</h3>
-        {% if students_list %}
+        {% if students %}
         <table id="students" class="table">
           <tr>
             <th>Select All<br><input type="checkbox" id="selectAllStudents"></input></th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Program City</th>
-            <th>School</th>
-            <th>Program Institution</th>
-            <th>Year Attended</th>
-            <th>Address Line 1</th>
-            <th>Address Line 2</th>
-            <th>City</th>
-            <th>Province</th>
-            <th>Postal Code</th>
-            <th>Ref. First Name</th>
-            <th>Ref. Last Name</th>
-            <th>Ref. Email</th>
-            <th>Ref. Address Line 1</th>
-            <th>Ref. Address Line 2</th>
-            <th>Ref. City</th>
-            <th>Ref. Number</th>
-            <th>Ref. Postal Code</th>
-            <th>Ref. Province </th>
+            {% for field in student_fields %}
+              <th>{{ field.verbose_name }}</th>
+            {% endfor %}
+            
           </tr>
-          {% for student in students_list %}
+          {% for student in students %}
           <tr id="student{{student.id}}Row" class="studentRow">
             <td><input id="student{{student.id}}" class="checkboxStudent" type="checkbox" name="checks" value={{student.email}}></td>
-            <td>{{student.first_name}}</td>
-            <td>{{student.last_name}}</td>
-            <td>{{student.email}}</td>
-            <td>{{student.phone_number}}</td>
-            <td>{{student.program_city}}</td>
-            <td>{{student.school}}</td>
-            <td>{{student.program_institution}}</td>
-            <td>{{student.year_attended}}</td>
-            <td>{{student.address_line1}}</td>
-            <td>{{student.address_line2}}</td>
-            <td>{{student.city}}</td>
-            <td>{{student.province}}</td>
-            <td>{{student.postal_code}}</td>
-            <td>{{student.reference_fname}}</td>
-            <td>{{student.reference_lname}}</td>
-            <td>{{student.reference_email}}</td>
-            <td>{{student.reference_address_line1}}</td>
-            <td>{{student.reference_address_line2}}</td>
-            <td>{{student.reference_city}}</td>
-            <td>{{student.reference_number}}</td>
-            <td>{{student.reference_postal_code}}</td>
-            <td>{{student.referece_province}}</td>
+            {% for field,value in student.items %}
+              {% if field != "id" %}
+              <td>{{ value }}</td>
+              {% endif %}
+            {% endfor %}
+            
           </tr>
           {% endfor %}
         </table>
@@ -196,36 +149,23 @@
       </div>
       <div class="volunteers-div" hidden>
         <h3>Volunteers</h3>
-        {% if volunteers_list %}
+        {% if volunteers %}
         <table id="volunteers" class="table">
           <tr>
             <th>Select All<br><input type="checkbox" id="selectAllVolunteers"></input></th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Role</th>
-            <th>Years Helped</th>
-            <th>Address Line 1</th>
-            <th>Address Line 2</th>
-            <th>City</th>
-            <th>Postal Code</th>
-            <th>Province</th>
+            {% for field in volunteer_fields %}
+              <th>{{ field.verbose_name }}</th>
+            {% endfor %}
+            
           </tr>
-          {% for volunteer in volunteers_list %}
+          {% for volunteer in volunteers %}
           <tr id="volunteer{{volunteer.id}}Row" class="volunteerRow">
             <td><input id="volunteer{{volunteer.id}}" class="checkboxVolunteer" type="checkbox" name="volun" value={{volunteer.email}}></td>
-            <td>{{volunteer.first_name}}</td>
-            <td>{{volunteer.last_name}}</td>
-            <td>{{volunteer.email}}</td>
-            <td>{{volunteer.phone_number}}</td>
-            <td>{{volunteer.role}}</td>
-            <td>{{volunteer.years_helped}}</td>
-            <td>{{volunteer.address_line1}}</td>
-            <td>{{volunteer.address_line2}}</td>
-            <td>{{volunteer.city}}</td>
-            <td>{{volunteer.postal_code}}</td>
-            <td>{{volunteer.province}}</td>
+            {% for field,value in volunteer.items %}
+              {% if field != "id" %}
+              <td>{{ value }}</td>
+              {% endif %}
+            {% endfor %}
           </tr>
           {% endfor %}
         </table>
