@@ -35,7 +35,6 @@
       <option value="Last Name">Last Name</option>
       <option value="Email">Email</option>
       <option value="Phone">Phone</option>
-      <option value="Donor">Donor</option>
     </select>
     <input id="submit" type="button" class="btn" value="Search"></input>
     <br><br>
@@ -159,7 +158,7 @@
             {% for field in student_fields %}
               <th>{{ field.verbose_name }}</th>
             {% endfor %}
-            
+
           </tr>
           {% for student in students %}
           <tr id="student{{student.id}}Row" class="studentRow">
@@ -169,7 +168,7 @@
               <td>{{ value }}</td>
               {% endif %}
             {% endfor %}
-            
+
           </tr>
           {% endfor %}
         </table>
@@ -187,7 +186,7 @@
             {% for field in volunteer_fields %}
               <th>{{ field.verbose_name }}</th>
             {% endfor %}
-            
+
           </tr>
           {% for volunteer in volunteers %}
           <tr id="volunteer{{volunteer.id}}Row" class="volunteerRow">
