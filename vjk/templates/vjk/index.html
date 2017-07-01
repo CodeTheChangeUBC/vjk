@@ -121,26 +121,20 @@
       </div>
       <div class="contributions-div" hidden>
         <h3>Contributions</h3>
-        {% if contributions_list %}
+        {% if contributions %}
         <table id="contributions" class="table">
           <tr>
-            <th>Year</th>
-            <th>Sponsor</th>
-            <th>Donor</th>
-            <th>Volunteer</th>
-            <th>Amount Contributed</th>
-            <th>Service Provided</th>
-            <th>Volunteer Hours</th>
+            {% for field in contribution_fields %}
+              <th> {{ field.verbose_name }} </th>
+            {% endfor %}
           </tr>
-          {% for contribution in contributions_list %}
+          {% for contribution in contributions %}
           <tr class="contributionRow">
-            <td>{{contribution.year}}</td>
-            <td>{{contribution.sponsor}}</td>
-            <td>{{contribution.donor}}</td>
-            <td>{{contribution.volunteer}}</td>
-            <td>{{contribution.amount_contributed}}</td>
-            <td>{{contribution.service_provided}}</td>
-            <td>{{contribution.volunteer_hours}}</td>
+            {% for field, value in contribution.items %}
+              {% if field != "id" %}
+              <td>{{ value }}</td>
+              {% endif %}
+            {% endfor %}
           </tr>
           {% endfor %}
         </table>
