@@ -151,10 +151,10 @@ class Volunteer(models.Model):
 		return self.first_name + ' ' + self.last_name
 
 class Contribution(models.Model):
-	year				= models.IntegerField(blank=True, null=True)
-	sponsor				= models.ForeignKey(Sponsor, on_delete=models.PROTECT, blank=True, null=True)
-	donor				= models.ForeignKey(Donor, on_delete=models.PROTECT, blank=True, null=True)
-	volunteer			= models.ForeignKey(Volunteer, on_delete=models.PROTECT, blank=True, null=True)
-	amount_contributed	= models.IntegerField(blank=True, null=True)
-	service_provided	= models.TextField(blank=True, null=True)
-	volunteer_hours		= models.IntegerField(blank=True, null=True)
+	year				= models.IntegerField(blank=True, null=True, verbose_name="Year")
+	sponsor				= models.ForeignKey(Sponsor, on_delete=models.PROTECT, blank=True, null=True, verbose_name="Sponsor")
+	donor				= models.ForeignKey(Donor, on_delete=models.PROTECT, blank=True, null=True, verbose_name="Donor")
+	volunteer			= models.ForeignKey(Volunteer, on_delete=models.PROTECT, blank=True, null=True, verbose_name="Volunteer")
+	amount_contributed	= models.IntegerField(blank=True, null=True, verbose_name="Amount Contributed")
+	service_provided	= models.TextField(blank=True, null=True, verbose_name="Service Provided")
+	volunteer_hours		= models.IntegerField(blank=True, null=True, verbose_name="Volunteer Hours")
