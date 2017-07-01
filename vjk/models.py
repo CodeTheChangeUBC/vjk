@@ -64,12 +64,12 @@ class Donor(models.Model):
 	primary_contact 	= models.ForeignKey(Contact,
 								on_delete=models.PROTECT,
 								related_name="donor1",
-								blank=True, null=True, 
+								blank=True, null=True,
 								verbose_name="Primary Contact")
 	secondary_contact 	= models.ForeignKey(Contact,
 								on_delete=models.PROTECT,
 								related_name="donor2",
-								blank=True, null=True, 
+								blank=True, null=True,
 								verbose_name="Secondary Contact")
 
 
@@ -83,14 +83,14 @@ class Sponsor(models.Model):
 								on_delete=models.PROTECT,
 								related_name="sponsor1",
 								default=-1,
-								blank=True, null=True, 
+								blank=True, null=True,
 								verbose_name="Primary Contact")
 	secondary_contact 	= models.ForeignKey(Contact,
 								on_delete=models.PROTECT,
 								related_name="sponsor2",
 								default=-1,
-								blank=True, null=True, 
-								verbose_name="Primary Contact")
+								blank=True, null=True,
+								verbose_name="Secondary Contact")
 
 	def __str__(self):
 		return self.name
