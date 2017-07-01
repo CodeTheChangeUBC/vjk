@@ -12,13 +12,13 @@ def index(request):
 	contacts	 		= Contact.objects.values();
 	contact_fields 		= Contact._meta.get_fields()[5:]
 	donors 				= Donor.objects.values();
-	donor_fields 		= Donor._meta.get_fields()[1:]
+	donor_fields 		= Donor._meta.get_fields()[2:]
 	sponsors 			= Sponsor.objects.values();
-	sponsor_fields 		= Sponsor._meta.get_fields()[1:]
+	sponsor_fields 		= Sponsor._meta.get_fields()[2:]
 	students 			= Student.objects.values()
 	student_fields 		= Student._meta.get_fields()[1:]
 	volunteers 			= Volunteer.objects.values()
-	volunteer_fields	= Volunteer._meta.get_fields()[1:]
+	volunteer_fields	= Volunteer._meta.get_fields()[2:]
 	contributions 		= Contribution.objects.values()
 	contribution_fields = Contribution._meta.get_fields()[1:]
 
