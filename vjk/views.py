@@ -37,4 +37,4 @@ def index(request):
 			"contributions": contributions,
 			"contribution_fields": contribution_fields
 	 }
-	return render(request, 'vjk/index.html', context)
+	return render(request, 'vjk/index_features.html', context)

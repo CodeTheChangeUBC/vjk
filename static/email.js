@@ -88,12 +88,12 @@ function copyToClipboard() {
     clipboard.on('success', function(e) {
       setTooltip(e.trigger, 'Copied!');
       hideTooltip(e.trigger);
-  });
+    });
 
-  clipboard.on('error', function(e) {
+    clipboard.on('error', function(e) {
       setTooltip(e.trigger, 'Failed!');
       hideTooltip(e.trigger);
-  });
+    });
 }
 
 function setTooltip(btn, message) {
