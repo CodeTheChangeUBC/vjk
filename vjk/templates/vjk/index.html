@@ -3,11 +3,12 @@
 <html>
 <head>
   <title>Search Page</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'vjk/style.css' %}"/>
-  <!-- jQuery import -->
-  <script type="text/javascript" src="{% static '/admin/js/vendor/jquery/jquery.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'search.js' %}"></script>
   <script type="text/javascript" src="{% static 'tableschange.js' %}"></script>
   <script type="text/javascript" src="{% static 'optionschange.js' %}"></script>
@@ -41,13 +42,8 @@
     <input id="submit" type="button" class="btn" value="Search"></input>
     <br><br>
 
-    <!-- Trigger -->
-<button class="btn" data-clipboard-target="checked">
-    Copy!
-</button>
-
-
-    <input id="download" type="button" class="btn" value="Copy Selected Email Addresses"></input><br><br>
+  
+    <input id="download" type="button" class="btn" value="Copy Selected Email Addresses"><p id="emailButton" class="btn" data-clipboard-text="Nothing!" hidden></p></input><br><br>
     <input id="selectEverything" type="button" class="btn" value="Select All Email Addresses (  All Categories)"></input>
     <hr>
     <div class="all">
@@ -64,7 +60,7 @@
           </tr>
           {% for contact in contacts %}
             <tr id="contact{{contact.id}}Row" class="contactRow">
-                <td><input id="contact{{contact.id}}" class="checkboxStudent" type="checkbox" name="checks" value="<{{contact.email}}>,"></input></td>
+                <td><input id="contact{{contact.id}}" class="checkboxContact" type="checkbox" name="checks" value="<{{contact.email}}>"></input></td>
             {% for value in contact %}
               <td>{{ value }}</td>
           {% endfor %}
@@ -162,7 +158,7 @@
           </tr>
           {% for student in students %}
           <tr id="student{{student.id}}Row" class="studentRow">
-            <td><input id="student{{student.id}}" class="checkboxStudent" type="checkbox" name="checks" value={{student.email}}></td>
+            <td><input id="student{{student.id}}" class="checkboxStudent" type="checkbox" name="checks" value="<{{student.email}}>"></td>
             {% for value in student %}
               <td>{{ value }}</td>
             {% endfor %}
@@ -188,7 +184,7 @@
           </tr>
           {% for volunteer in volunteers %}
           <tr id="volunteer{{volunteer.id}}Row" class="volunteerRow">
-            <td><input id="volunteer{{volunteer.id}}" class="checkboxVolunteer" type="checkbox" name="volun" value={{volunteer.email}}></td>
+            <td><input id="volunteer{{volunteer.id}}" class="checkboxVolunteer" type="checkbox" name="volun" value="<{{volunteer.email}}>"></td>
             {% for value in volunteer %}
               <td>{{ value }}</td>
             {% endfor %}
