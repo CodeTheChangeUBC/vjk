@@ -20,6 +20,8 @@ province_choices = {
 phone_regex = RegexValidator(regex=r'^\+?1?\d{10,12}$',
 				message="Phone number must be entered in the format: '+16045555555'.")
 
+
+
 # Create your models here.
 class Contact(models.Model):
 	first_name 		= models.CharField(max_length = 75, verbose_name="First Name")
@@ -35,6 +37,12 @@ class Contact(models.Model):
 
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
+
+	def __iter__(self):
+		for field in self._meta.fields:
+			if field.name != "id":
+				yield field.value_to_string(self)
+
 
 	def organization(self):
 		"""
@@ -54,8 +62,7 @@ class Contact(models.Model):
 			result += ' and ' + s2.name if d1 or d2 or s1 else s2.name
 		return result
 		organization.short_description = "Contact For?"
-
-
+	
 class Donor(models.Model):
 	org_name 			= models.CharField(max_length = 50, verbose_name="Organization Name")
 	location 			= models.CharField(max_length = 100, blank=True, null=True, verbose_name="Location")
@@ -76,6 +83,13 @@ class Donor(models.Model):
 	def __str__(self):
 		return self.org_name
 
+	def __iter__(self):
+		for field in self._meta.fields:
+			if field.name != "id":
+				yield field.value_to_string(self)
+
+
+
 class Sponsor(models.Model):
 	name 				= models.CharField(max_length = 50, verbose_name="Name")
 	service_provided 	= models.CharField(max_length = 50, blank=True, null=True, verbose_name="Provided Service")
@@ -94,6 +108,12 @@ class Sponsor(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	def __iter__(self):
+		for field in self._meta.fields:
+			if field.name != "id":
+				yield field.value_to_string(self)
+
 
 
 class Student(models.Model):
@@ -130,6 +150,12 @@ class Student(models.Model):
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
 
+	def __iter__(self):
+		for field in self._meta.fields:
+			if field.name != "id":
+				yield field.value_to_string(self)
+
+
 
 class Volunteer(models.Model):
 
@@ -150,6 +176,12 @@ class Volunteer(models.Model):
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
 
+	def __iter__(self):
+		for field in self._meta.fields:
+			if field.name != "id":
+				yield field.value_to_string(self)
+
+
 class Contribution(models.Model):
 	year				= models.IntegerField(blank=True, null=True, verbose_name="Year")
 	sponsor				= models.ForeignKey(Sponsor, on_delete=models.PROTECT, blank=True, null=True, verbose_name="Sponsor")
@@ -158,3 +190,9 @@ class Contribution(models.Model):
 	amount_contributed	= models.IntegerField(blank=True, null=True, verbose_name="Amount Contributed")
 	service_provided	= models.TextField(blank=True, null=True, verbose_name="Service Provided")
 	volunteer_hours		= models.IntegerField(blank=True, null=True, verbose_name="Volunteer Hours")
+
+	def __iter__(self):
+		for field in self._meta.fields:
+			if field.name != "id":
+				yield field.value_to_string(self)
+

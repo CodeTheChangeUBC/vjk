@@ -3,15 +3,18 @@
 <html>
 <head>
   <title>Search Page</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'vjk/style.css' %}"/>
-  <!-- jQuery import -->
-  <script type="text/javascript" src="{% static '/admin/js/vendor/jquery/jquery.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'search.js' %}"></script>
   <script type="text/javascript" src="{% static 'tableschange.js' %}"></script>
   <script type="text/javascript" src="{% static 'optionschange.js' %}"></script>
   <script type="text/javascript" src="{% static 'email.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+
 </head>
 
 <body>
@@ -38,8 +41,10 @@
     </select>
     <input id="submit" type="button" class="btn" value="Search"></input>
     <br><br>
-    <input id="download" type="button" class="btn" value="Copy Selected Email Addresses"></input><br><br>
-    <input id="selectEverything" type="button" class="btn" value="Select All Email Addresses (All Categories)"></input>
+
+  
+    <input id="download" type="button" class="btn" value="Copy Selected Email Addresses"><p id="emailButton" class="btn" data-clipboard-text="Nothing!" hidden></p></input><br><br>
+    <input id="selectEverything" type="button" class="btn" value="Select All Email Addresses (  All Categories)"></input>
     <hr>
     <div class="all">
         {% csrf_token %}
@@ -54,13 +59,11 @@
             {% endfor %}
           </tr>
           {% for contact in contacts %}
-          <tr id="contact{{contact.id}}Row" class="contactRow">
-            <td><input id="contact{{contact.id}}" class="checkboxContact" type="checkbox" name="checks" value={{contact.email}}></input></td>
-            {% for field,value in contact.items %}
-              {% if field != "id" %}
+            <tr id="contact{{contact.id}}Row" class="contactRow">
+                <td><input id="contact{{contact.id}}" class="checkboxContact" type="checkbox" name="checks" value="<{{contact.email}}>"></input></td>
+            {% for value in contact %}
               <td>{{ value }}</td>
-              {% endif %}
-            {% endfor %}
+          {% endfor %}
           </tr>
           {% endfor %}
         </table>
@@ -81,10 +84,8 @@
           </tr>
           {% for donor in donors %}
           <tr class="donorRow">
-            {% for field,value in donor.items %}
-              {% if field != "id" %}
+            {% for value in donor %}
               <td>{{ value }}</td>
-              {% endif %}
             {% endfor %}
           </tr>
           {% endfor %}
@@ -94,6 +95,8 @@
         {% endif %}
         <hr>
       </div>
+
+      <!-- SPONSORS -->
       <div class="sponsors-div" hidden>
         <h3>Sponsors</h3>
         {% if sponsors %}
@@ -105,10 +108,8 @@
           </tr>
           {% for sponsor in sponsors %}
           <tr class="sponsorRow">
-            {% for field,value in sponsor.items %}
-              {% if field != "id" %}
+            {% for value in sponsor %}
               <td>{{ value }}</td>
-              {% endif %}
             {% endfor %}
 
           </tr>
@@ -130,10 +131,8 @@
           </tr>
           {% for contribution in contributions %}
           <tr class="contributionRow">
-            {% for field, value in contribution.items %}
-              {% if field != "id" %}
+            {% for value in contribution %}
               <td>{{ value }}</td>
-              {% endif %}
             {% endfor %}
           </tr>
           {% endfor %}
@@ -143,6 +142,9 @@
         {% endif %}
         <hr>
       </div>
+
+
+      <!-- STUDENTS  -->
       <div class="students-div" hidden>
         <h3>Students</h3>
         {% if students %}
@@ -156,13 +158,10 @@
           </tr>
           {% for student in students %}
           <tr id="student{{student.id}}Row" class="studentRow">
-            <td><input id="student{{student.id}}" class="checkboxStudent" type="checkbox" name="checks" value={{student.email}}></td>
-            {% for field,value in student.items %}
-              {% if field != "id" %}
+            <td><input id="student{{student.id}}" class="checkboxStudent" type="checkbox" name="checks" value="<{{student.email}}>"></td>
+            {% for value in student %}
               <td>{{ value }}</td>
-              {% endif %}
             {% endfor %}
-
           </tr>
           {% endfor %}
         </table>
@@ -171,6 +170,8 @@
         {% endif %}
         <hr>
       </div>
+
+      <!-- VOLUNTEERS  -->
       <div class="volunteers-div" hidden>
         <h3>Volunteers</h3>
         {% if volunteers %}
@@ -180,15 +181,12 @@
             {% for field in volunteer_fields %}
               <th>{{ field.verbose_name }}</th>
             {% endfor %}
-
           </tr>
           {% for volunteer in volunteers %}
           <tr id="volunteer{{volunteer.id}}Row" class="volunteerRow">
-            <td><input id="volunteer{{volunteer.id}}" class="checkboxVolunteer" type="checkbox" name="volun" value={{volunteer.email}}></td>
-            {% for field,value in volunteer.items %}
-              {% if field != "id" %}
+            <td><input id="volunteer{{volunteer.id}}" class="checkboxVolunteer" type="checkbox" name="volun" value="<{{volunteer.email}}>"></td>
+            {% for value in volunteer %}
               <td>{{ value }}</td>
-              {% endif %}
             {% endfor %}
           </tr>
           {% endfor %}
