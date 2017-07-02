@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  clipboard = new Clipboard('.btn')
+
   $("#download").on("click", function() {
       var arr = [];
       // Get checked email
