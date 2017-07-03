@@ -62,7 +62,7 @@ class Contact(models.Model):
 			result += ' and ' + s2.name if d1 or d2 or s1 else s2.name
 		return result
 		organization.short_description = "Contact For?"
-	
+
 class Donor(models.Model):
 	org_name 			= models.CharField(max_length = 50, verbose_name="Organization Name")
 	location 			= models.CharField(max_length = 100, blank=True, null=True, verbose_name="Location")
@@ -92,7 +92,7 @@ class Donor(models.Model):
 
 class Sponsor(models.Model):
 	name 				= models.CharField(max_length = 50, verbose_name="Name")
-	service_provided 	= models.CharField(max_length = 50, blank=True, null=True, verbose_name="Provided Service")
+	service_provided 	= models.CharField(max_length = 50, blank=True, null=True, verbose_name="Service Provided")
 	primary_contact 	= models.ForeignKey(Contact,
 								on_delete=models.PROTECT,
 								related_name="sponsor1",
@@ -122,7 +122,7 @@ class Student(models.Model):
 	last_name 			= models.CharField(max_length = 75, verbose_name="Last Name")
 	email 				= models.EmailField(verbose_name="E-mail")
 	school 				= models.CharField(max_length = 75, blank=True, null=True, verbose_name="School")
-	phone_number 		= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True, verbose_name="Number")
+	phone_number 		= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True, verbose_name="Phone")
 
 	program_city 		= models.CharField(max_length = 100, blank=True, null=True, verbose_name="Program City")
 	year_attended 		= models.IntegerField(blank=True,null=True, verbose_name="Year Attended")
@@ -138,7 +138,7 @@ class Student(models.Model):
 										verbose_name="Ref. First Name")
 	reference_lname 	= models.CharField(max_length=75,default="",
 										verbose_name="Ref. Last Name")
-	reference_email 	= models.EmailField(default="", verbose_name='Ref. Email')
+	reference_email 	= models.EmailField(default="", verbose_name='Ref. E-mail')
 	reference_number 	= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True, verbose_name="Ref. Number")
 
 	reference_address_line1 = models.CharField(max_length = 50, blank=True, null=True, verbose_name="Ref. Addr - Line 1")
@@ -195,4 +195,3 @@ class Contribution(models.Model):
 		for field in self._meta.fields:
 			if field.name != "id":
 				yield field.value_to_string(self)
-
