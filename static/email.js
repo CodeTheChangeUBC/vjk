@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   $("#download").on("click", function() {
       var arr = [];
       // Get checked email
@@ -9,7 +10,9 @@ $(document).ready(function(){
       arr = jQuery.unique(arr);
       // Array to String
       var str = arr.toString();
-      copyToClipboard(str);
+      $("#emailButton").attr("data-clipboard-text", str)
+
+      copyToClipboard();
   });
   var everythingStatus = false;
   $("#selectEverything").on("click", function() {
@@ -70,6 +73,37 @@ $(document).ready(function(){
 
 });
 
-function copyToClipboard(text) {
-    window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+function copyToClipboard() {
+
+    $('#emailButton').tooltip({
+      trigger: 'click',
+      placement: 'right'
+    });
+
+    var clipboard = new Clipboard('#emailButton')
+    
+    // Click the button
+    $("#emailButton").trigger('click');
+
+    clipboard.on('success', function(e) {
+      setTooltip(e.trigger, 'Copied!');
+      hideTooltip(e.trigger);
+    });
+
+    clipboard.on('error', function(e) {
+      setTooltip(e.trigger, 'Failed!');
+      hideTooltip(e.trigger);
+    });
+}
+
+function setTooltip(btn, message) {
+  $(btn).tooltip('hide')
+    .attr('data-original-title', message)
+    .tooltip('show');
+}
+
+function hideTooltip(btn) {
+  setTimeout(function() {
+    $(btn).tooltip('hide');
+  }, 1000);
 }
