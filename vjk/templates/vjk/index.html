@@ -8,22 +8,31 @@
 <body>
   <div class="container-fluid">
     {% block header %} {% endblock %}
-    {% block options %} {% endblock %}
-    
-    <!-- CONTACTS -->
-    {% block contacts %} {% endblock %}
 
-    <!-- DONORS -->
-    {% block donors %} {% endblock %}
-    
-    <!-- SPONSORS -->
-    {% block sponsors %} {% endblock %}
+    <div class="container options">
+      {% block options %} {% endblock %}
+    </div>
+
+    <div class="all">
+      <!-- CONTACTS -->
+      {% block contacts %} {% endblock %}
+
+      <!-- DONORS -->
+      {% block donors %} {% endblock %}
       
-    <!-- STUDENTS  -->
-    {% block students %} {% endblock %}
+      <!-- SPONSORS -->
+      {% block sponsors %} {% endblock %}
+        
+      <!-- STUDENTS  -->
+      {% block students %} {% endblock %}
 
-    <!-- VOLUNTEERS  -->
-    {% block volunteers %} {% endblock %}
+      <!-- VOLUNTEERS  -->
+      {% block volunteers %} {% endblock %}
+
+      <!-- CONTRIBUTIONS  -->
+      {% block contributions %} {% endblock %}
+    </div>
+
   </div>
 </body>
 </html>

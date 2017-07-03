@@ -19,14 +19,9 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+      <p class="navbar-brand">VJK Database</p>
     </div>
-    <!-- <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
-    </ul>
-     --><ul class="nav navbar-nav navbar-right">
+     <ul class="nav navbar-nav navbar-right">
       <li><a href="{% url 'admin:index' %}">Back to Admin Page</a></li>
       <li><a href="{% url 'admin:logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
     </ul>
@@ -35,35 +30,51 @@
 {% endblock %}
 
 {% block options %}
-<h3>For
-  <select id="table">
-    <option value="contacts">Contacts</option>
-    <option value="donors">Donors</option>
-    <option value="sponsors">Sponsors</option>
-    <option value="students">Students</option>
-    <option value="volunteers">Volunteers</option>
-    <option value="contributions">Contributions</option>
-  </select>
-</h3>
-<input id="input" type="text" placeholder="Search" onsubmit="initiateSearch">
-<select id="field">
-  <option value="all">Anything</option>
-  <option value="First Name">First Name</option>
-  <option value="Last Name">Last Name</option>
-  <option value="Email">Email</option>
-  <option value="Phone">Phone</option>
-</select>
-<input id="submit" type="button" class="btn" value="Search"></input>
+<div class="container">
+	<div class="container col-sm-6">
+		<h3>Table: 
+		  <select id="table">
+		    <option value="contacts">Contacts</option>
+		    <option value="donors">Donors</option>
+		    <option value="sponsors">Sponsors</option>
+		    <option value="students">Students</option>
+		    <option value="volunteers">Volunteers</option>
+		    <option value="contributions">Contributions</option>
+		  </select>
+		</h3>
+	</div>
+	<div class="container search col-sm-6"> 
+		<input id="input" type="text" placeholder="Search" onsubmit="initiateSearch">
+		<select id="field">
+		  <option value="all">Anything</option>
+		  <option value="First Name">First Name</option>
+		  <option value="Last Name">Last Name</option>
+		  <option value="Email">Email</option>
+		  <option value="Phone">Phone</option>
+		</select>
+		<input id="submit" type="button" class="btn" value="Search"></input>
+	</div>
+</div>
+
+<div class="email container col-sm-12">
+	<input id="download" type="button" class="btn" value="Copy Selected Email Addresses">
+		<!-- <img src="{% static 'vjk/clippy.svg' %}" alt="Copy to clipboard"> -->
+		<button id="emailButton" class="btn" data-clipboard-text="Nothing!" hidden> 
+		</button>
+	</input>
+	<br>
+	<input id="selectEverything" type="button" class="btn" value="Select All Email Addresses (All Categories)"></input>
+	<hr>
+</div>
+
+
+
+{% csrf_token %}
 {% endblock %}
 
 {% block contacts %}
-<input id="download" type="button" class="btn" value="Copy Selected Email Addresses"><p id="emailButton" class="btn" data-clipboard-text="Nothing!" hidden></p></input><br><br>
-<input id="selectEverything" type="button" class="btn" value="Select All Email Addresses (  All Categories)"></input>
-<hr>
-<div class="all">
-{% csrf_token %}
 <div class="contacts-div">
-<h3>Contacts</h3>
+<h3 class="model-name">Contacts</h3>
 {% if contacts %}
 <table id="contacts" class="table">
   <tr>
@@ -90,7 +101,7 @@
 
 {% block donors %}
 <div class="donors-div" hidden>
-<h3>Donors</h3>
+<h3 class="model-name">Donors</h3>
 {% if donors %}
 <table id="donors" class="table">
   <tr>
@@ -115,7 +126,7 @@
 
 {% block sponsors %}
 <div class="sponsors-div" hidden>
-	<h3>Sponsors</h3>
+	<h3 class="model-name">Sponsors</h3>
 	{% if sponsors %}
 	<table id="sponsors" class="table">
 	  <tr>
@@ -141,7 +152,7 @@
 
 {% block contributions %}
 <div class="contributions-div" hidden>
-	<h3>Contributions</h3>
+	<h3 class="model-name">Contributions</h3>
 	{% if contributions %}
 	<table id="contributions" class="table">
 	  <tr>
@@ -166,7 +177,7 @@
 
 {% block students %}
 	<div class="students-div" hidden>
-	<h3>Students</h3>
+	<h3 class="model-name">Students</h3>
 	{% if students %}
 	<table id="students" class="table">
 	  <tr>
@@ -194,7 +205,7 @@
 
 {% block volunteers %}
 <div class="volunteers-div" hidden>
-	<h3>Volunteers</h3>
+	<h3 class="model-name">Volunteers</h3>
 	{% if volunteers %}
 	<table id="volunteers" class="table">
 	  <tr>
@@ -215,7 +226,6 @@
 	{% else %}
 	<p>No Volunteer data are available.</p>
 	{% endif %}
-	</div>
 </div>
 {% endblock %}
 
