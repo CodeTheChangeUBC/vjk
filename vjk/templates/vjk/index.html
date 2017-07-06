@@ -1,201 +1,38 @@
-{% load static %}
-
 <html>
 <head>
   <title>Search Page</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'vjk/style.css' %}"/>
-  <script type="text/javascript" src="{% static 'search.js' %}"></script>
-  <script type="text/javascript" src="{% static 'tableschange.js' %}"></script>
-  <script type="text/javascript" src="{% static 'optionschange.js' %}"></script>
-  <script type="text/javascript" src="{% static 'email.js' %}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
-
+  <!-- Load Scripts  -->
+  {% block scripts %} {% endblock %}
 </head>
 
 <body>
   <div class="container-fluid">
-    <h1>VJK Database</h1>
-    <p><a href="{% url 'admin:index' %}">Back to Admin Page</a></p>
-    <h3>For
-      <select id="table">
-        <option value="contacts">Contacts</option>
-        <option value="donors">Donors</option>
-        <option value="sponsors">Sponsors</option>
-        <option value="students">Students</option>
-        <option value="volunteers">Volunteers</option>
-        <option value="contributions">Contributions</option>
-      </select>
-    </h3>
-    <input id="input" type="text" placeholder="Search" onsubmit="initiateSearch">
-    <select id="field">
-      <option value="all">Anything</option>
-      <option value="First Name">First Name</option>
-      <option value="Last Name">Last Name</option>
-      <option value="Email">Email</option>
-      <option value="Phone">Phone</option>
-    </select>
-    <input id="submit" type="button" class="btn" value="Search"></input>
-    <br><br>
+    {% block header %} {% endblock %}
 
-  
-    <input id="download" type="button" class="btn" value="Copy Selected Email Addresses"><p id="emailButton" class="btn" data-clipboard-text="Nothing!" hidden></p></input><br><br>
-    <input id="selectEverything" type="button" class="btn" value="Select All Email Addresses (  All Categories)"></input>
-    <hr>
-    <div class="all">
-        {% csrf_token %}
-      <div class="contacts-div">
-        <h3>Contacts</h3>
-        {% if contacts %}
-        <table id="contacts" class="table">
-          <tr>
-            <th>Select All<br><input type="checkbox" id="selectAllContacts"></input></th>
-            {% for field in contact_fields %}
-              <th>{{ field.verbose_name }}</th>
-            {% endfor %}
-          </tr>
-          {% for contact in contacts %}
-            <tr id="contact{{contact.id}}Row" class="contactRow">
-                <td><input id="contact{{contact.id}}" class="checkboxContact" type="checkbox" name="checks" value="<{{contact.email}}>"></input></td>
-            {% for value in contact %}
-              <td>{{ value }}</td>
-          {% endfor %}
-          </tr>
-          {% endfor %}
-        </table>
-        {% else %}
-        <p>No Contact data are available.</p>
-        {% endif %}
-        <hr>
-      </div>
-
-      <div class="donors-div" hidden>
-        <h3>Donors</h3>
-        {% if donors %}
-        <table id="donors" class="table">
-          <tr>
-            {% for field in donor_fields %}
-              <th>{{ field.verbose_name }}</th>
-            {% endfor %}
-          </tr>
-          {% for donor in donors %}
-          <tr class="donorRow">
-            {% for value in donor %}
-              <td>{{ value }}</td>
-            {% endfor %}
-          </tr>
-          {% endfor %}
-        </table>
-        {% else %}
-        <p>No Donor data are available.</p>
-        {% endif %}
-        <hr>
-      </div>
-
-      <!-- SPONSORS -->
-      <div class="sponsors-div" hidden>
-        <h3>Sponsors</h3>
-        {% if sponsors %}
-        <table id="sponsors" class="table">
-          <tr>
-            {% for field in sponsor_fields %}
-              <th>{{ field.verbose_name }}</th>
-            {% endfor %}
-          </tr>
-          {% for sponsor in sponsors %}
-          <tr class="sponsorRow">
-            {% for value in sponsor %}
-              <td>{{ value }}</td>
-            {% endfor %}
-
-          </tr>
-          {% endfor %}
-        </table>
-        {% else %}
-        <p>No Sponsor data are available.</p>
-        {% endif %}
-        <hr>
-      </div>
-      <div class="contributions-div" hidden>
-        <h3>Contributions</h3>
-        {% if contributions %}
-        <table id="contributions" class="table">
-          <tr>
-            {% for field in contribution_fields %}
-              <th> {{ field.verbose_name }} </th>
-            {% endfor %}
-          </tr>
-          {% for contribution in contributions %}
-          <tr class="contributionRow">
-            {% for value in contribution %}
-              <td>{{ value }}</td>
-            {% endfor %}
-          </tr>
-          {% endfor %}
-        </table>
-        {% else %}
-        <p>No Contribution data are available.</p>
-        {% endif %}
-        <hr>
-      </div>
-
-
-      <!-- STUDENTS  -->
-      <div class="students-div" hidden>
-        <h3>Students</h3>
-        {% if students %}
-        <table id="students" class="table">
-          <tr>
-            <th>Select All<br><input type="checkbox" id="selectAllStudents"></input></th>
-            {% for field in student_fields %}
-              <th>{{ field.verbose_name }}</th>
-            {% endfor %}
-
-          </tr>
-          {% for student in students %}
-          <tr id="student{{student.id}}Row" class="studentRow">
-            <td><input id="student{{student.id}}" class="checkboxStudent" type="checkbox" name="checks" value="<{{student.email}}>"></td>
-            {% for value in student %}
-              <td>{{ value }}</td>
-            {% endfor %}
-          </tr>
-          {% endfor %}
-        </table>
-        {% else %}
-        <p>No Student data are available.</p>
-        {% endif %}
-        <hr>
-      </div>
-
-      <!-- VOLUNTEERS  -->
-      <div class="volunteers-div" hidden>
-        <h3>Volunteers</h3>
-        {% if volunteers %}
-        <table id="volunteers" class="table">
-          <tr>
-            <th>Select All<br><input type="checkbox" id="selectAllVolunteers"></input></th>
-            {% for field in volunteer_fields %}
-              <th>{{ field.verbose_name }}</th>
-            {% endfor %}
-          </tr>
-          {% for volunteer in volunteers %}
-          <tr id="volunteer{{volunteer.id}}Row" class="volunteerRow">
-            <td><input id="volunteer{{volunteer.id}}" class="checkboxVolunteer" type="checkbox" name="volun" value="<{{volunteer.email}}>"></td>
-            {% for value in volunteer %}
-              <td>{{ value }}</td>
-            {% endfor %}
-          </tr>
-          {% endfor %}
-        </table>
-        {% else %}
-        <p>No Volunteer data are available.</p>
-        {% endif %}
-      </div>
+    <div class="container options">
+      {% block options %} {% endblock %}
     </div>
 
+    <div class="all">
+      <!-- CONTACTS -->
+      {% block contacts %} {% endblock %}
+
+      <!-- DONORS -->
+      {% block donors %} {% endblock %}
+      
+      <!-- SPONSORS -->
+      {% block sponsors %} {% endblock %}
+        
+      <!-- STUDENTS  -->
+      {% block students %} {% endblock %}
+
+      <!-- VOLUNTEERS  -->
+      {% block volunteers %} {% endblock %}
+
+      <!-- CONTRIBUTIONS  -->
+      {% block contributions %} {% endblock %}
+    </div>
+
+  </div>
 </body>
 </html>
