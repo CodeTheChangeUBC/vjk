@@ -35,15 +35,20 @@ class Contact(models.Model):
 	province 		= models.CharField(max_length = 20, choices = province_choices, blank=True, null=True, verbose_name="Province")
 	postal_code 	= models.CharField(max_length=6, blank=True, null=True, verbose_name="Postal Code")
 
+	# Return name as identifier
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
 
+	# Iterate over fields values. 
 	def __iter__(self):
 		for field in self._meta.fields:
 			if field.name != "id":
 				yield field.value_to_string(self)
 
-
+	# Enforce that first name, last name and email form unique combination
+	class meta:
+		unique_together = (('first_name', 'last_name', 'email'),)
+	
 	def organization(self):
 		"""
 		Return donor(s) or sponsor(s) for which contact is the contact
@@ -79,10 +84,11 @@ class Donor(models.Model):
 								blank=True, null=True,
 								verbose_name="Secondary Contact")
 
-
+	# Return name as identifier
 	def __str__(self):
 		return self.org_name
 
+	# Iterate over fields values. If foreign key, produce name instead of id
 	def __iter__(self):
 		for field in self._meta.fields:
 			if field.name != "id":
@@ -94,6 +100,9 @@ class Donor(models.Model):
 				else:
 					yield val
 
+	# Organisation name is unique
+	class meta:
+		unique_together = (('org_name'),)
 
 
 class Sponsor(models.Model):
@@ -112,9 +121,11 @@ class Sponsor(models.Model):
 								blank=True, null=True,
 								verbose_name="Secondary Contact")
 
+	# Return name as identifier
 	def __str__(self):
 		return self.name
 
+	# Iterate over fields values. If foreign key, produce name instead of id
 	def __iter__(self):
 		for field in self._meta.fields:
 			if field.name != "id":
@@ -126,10 +137,13 @@ class Sponsor(models.Model):
 				else:
 					yield val
 
+	# Name of sponsor is unique
+	class meta:
+		unique_together = (('name'),)
+
 
 
 class Student(models.Model):
-
 	first_name 			= models.CharField(max_length = 75, verbose_name="First Name")
 	last_name 			= models.CharField(max_length = 75, verbose_name="Last Name")
 	email 				= models.EmailField(verbose_name="E-mail")
@@ -159,15 +173,19 @@ class Student(models.Model):
 	reference_province 		= models.CharField(max_length = 20, choices = province_choices, blank=True, null=True, verbose_name="Ref. Province")
 	reference_postal_code 	= models.CharField(max_length=6, blank=True, null=True, verbose_name="Ref. Postal Code")
 
+	# Return name as identifier
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
 
+	# Iterate over field values
 	def __iter__(self):
 		for field in self._meta.fields:
 			if field.name != "id":
 				yield field.value_to_string(self)
 
-
+	# Enforce that first name, last name and email form unique combination
+	class meta:
+		unique_together = (('first_name', 'last_name', 'email'),)
 
 class Volunteer(models.Model):
 
@@ -185,13 +203,19 @@ class Volunteer(models.Model):
 	role 				= models.CharField(max_length = 75, blank=True, null=True, verbose_name="Role")
 	years_helped 		= models.CharField(max_length=75,default="", blank=True, null=True, verbose_name="Years Helped")
 
+	# Return name as identifier
 	def __str__(self):
 		return self.first_name + ' ' + self.last_name
 
+	# Iterate over field values
 	def __iter__(self):
 		for field in self._meta.fields:
 			if field.name != "id":
 				yield field.value_to_string(self)
+
+	# Enforce that first name, last name and email form unique combination
+	class meta:
+		unique_together = (('first_name', 'last_name', 'email'),)
 
 
 class Contribution(models.Model):
@@ -203,6 +227,7 @@ class Contribution(models.Model):
 	service_provided	= models.TextField(blank=True, null=True, verbose_name="Service Provided")
 	volunteer_hours		= models.IntegerField(blank=True, null=True, verbose_name="Volunteer Hours")
 
+	# Iterate over fields values. If foreign key, produce name instead of id
 	def __iter__(self):
 		for field in self._meta.fields:
 			if field.name != "id":

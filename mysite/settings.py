@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'vjk.apps.VjkConfig',
     'django.contrib.staticfiles',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
