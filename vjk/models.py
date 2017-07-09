@@ -86,7 +86,13 @@ class Donor(models.Model):
 	def __iter__(self):
 		for field in self._meta.fields:
 			if field.name != "id":
-				yield field.value_to_string(self)
+				val = field.value_to_string(self)
+				if (val != 'None' 
+					and (field.name == 'primary_contact' 
+						or field.name == 'secondary_contact')):
+					yield Contact.objects.get(pk=int(val))
+				else:
+					yield val
 
 
 
@@ -112,7 +118,13 @@ class Sponsor(models.Model):
 	def __iter__(self):
 		for field in self._meta.fields:
 			if field.name != "id":
-				yield field.value_to_string(self)
+				val = field.value_to_string(self)
+				if (val != 'None' 
+					and (field.name == 'primary_contact' 
+						or field.name == 'secondary_contact')):
+					yield Contact.objects.get(pk=int(val))
+				else:
+					yield val
 
 
 
@@ -194,4 +206,12 @@ class Contribution(models.Model):
 	def __iter__(self):
 		for field in self._meta.fields:
 			if field.name != "id":
-				yield field.value_to_string(self)
+				val = field.value_to_string(self)
+				if (field.name == 'sponsor' and val!='None'):
+					yield Sponsor.objects.get(pk=int(val))
+				elif (field.name == 'donor' and val!='None'):
+					yield Donor.objects.get(pk=int(val))
+				elif (field.name == 'volunteer' and val!='None'):
+					yield Volunteer.objects.get(pk=int(val))
+				else: 
+					yield val

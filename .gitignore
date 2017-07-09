@@ -100,6 +100,10 @@ celerybeat-schedule
 .venv
 venv/
 ENV/
+bin/*
+include/*
+pip-selfcheck.json
+libmysqlclient.20.dylib
 
 # Spyder project settings
 .spyderproject
