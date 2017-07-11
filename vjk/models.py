@@ -146,13 +146,49 @@ class Sponsor(models.Model):
 class Student(models.Model):
 	first_name 			= models.CharField(max_length = 75, verbose_name="First Name")
 	last_name 			= models.CharField(max_length = 75, verbose_name="Last Name")
+	gender 				= models.CharField(max_length = 10, 
+											choices = {
+														('M','Male'),
+														('F','Female'),
+														('O','Other')
+													}, 
+											verbose_name="Gender", null = True, blank = True)
+	
+	bday_regex 			= RegexValidator(regex=r'^\d{2}/\d{2}/\d{4}', 
+								message='Birth date must be entered in form MM/DD/YYYY')
+	birth_date 			= models.CharField(max_length = 10, validators=[bday_regex], blank = True, null = True, verbose_name='Birth Date')
+	
+	aboriginal_group 	= models.CharField(max_length = 20, 
+											choices = 	{
+											('First Nations','First Nations'),
+											('Metis','Metis'),
+											('Inuit','Inuit')
+											},
+											blank = True, null = True, 
+											verbose_name='Aboriginal Group')
+
 	email 				= models.EmailField(verbose_name="E-mail")
 	school 				= models.CharField(max_length = 75, blank=True, null=True, verbose_name="School")
-	phone_number 		= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True, verbose_name="Phone")
+	home_phone 			= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True, verbose_name="Home Phone")
+	cell_phone	 		= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True, verbose_name="Cell Phone")
 
+	guardian_fname		= models.CharField(max_length = 75, verbose_name="Guard. First Name", blank = True, null = True)
+	guardian_lname		= models.CharField(max_length = 75, verbose_name="Guard. Last Name", blank = True, null = True)
+	guardian_phone		= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True, verbose_name="Guard. Phone")
+	guardian_email		= models.EmailField(default="",verbose_name="Guard. Email",blank=True,null=True)
+
+	teacher_fname		= models.CharField(max_length = 75, verbose_name="Teach. First Name", blank = True, null = True)
+	teacher_lname		= models.CharField(max_length = 75, verbose_name="Teach. Last Name", blank = True, null = True)
+	teacher_email		= models.EmailField(default="",verbose_name="Teach. Email",blank=True,null=True)
+	teacher_phone		= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True, verbose_name="Teach. Phone")
+	
 	program_city 		= models.CharField(max_length = 100, blank=True, null=True, verbose_name="Program City")
 	year_attended 		= models.IntegerField(blank=True,null=True, verbose_name="Year Attended")
 	program_institution = models.CharField(max_length = 75, blank=True, null=True, verbose_name="Institution")
+	mentor				= models.CharField(max_length = 75, blank=True, null=True, verbose_name="Mentor")
+	room_assignment		= models.CharField(max_length = 75, blank=True, null=True, verbose_name="Room Assign.")
+	chaperone_fname		= models.CharField(max_length = 75, blank=True, null=True, verbose_name="Chaperone First Name")
+	chaperone_lname		= models.CharField(max_length = 75, blank=True, null=True, verbose_name="Chaperone Last Name")
 
 	address_line1 		= models.CharField(max_length = 50, blank=True, null=True, verbose_name="Address - Line 1")
 	address_line2 		= models.CharField(max_length = 50, blank=True, null=True, verbose_name="Address - Line 2")

@@ -34,11 +34,16 @@ class SponsorAdmin(admin.ModelAdmin):
 
 class StudentAdmin(admin.ModelAdmin):
 	fieldsets = [
-		(None, 				{'fields': ['first_name', 'last_name']}),
-		('Contact Info', 	{'fields': ['email', 'phone_number', 'school', 'address_line1',
+		('Personal Info', 	{'fields': ['first_name', 'last_name', 'gender', 'birth_date', 'aboriginal_group']}),
+		('Contact Info', 	{'fields': ['email', 'home_phone' ,'cell_phone', 'school', 'address_line1',
 								'address_line2', 'city', 'province', 'postal_code']}),
-		('Program Details', {'fields': ['program_city','year_attended','program_institution']}),
-		('References',		{'fields': ['reference_fname', 'reference_lname', 'reference_email']})
+		('Guardian Info', {'fields': ['guardian_fname','guardian_lname','guardian_email','guardian_phone']}),
+		('Teacher Info', {'fields': ['teacher_fname','teacher_lname','teacher_email','teacher_phone']}),
+		('Program Details', {'fields': ['program_city','year_attended','program_institution','mentor',
+										'room_assignment','chaperone_fname','chaperone_lname']}),
+		('Reference Info',		{'fields': ['reference_fname', 'reference_lname', 'reference_email',
+											'reference_address_line1','reference_address_line2', 
+											'reference_city', 'reference_province','reference_postal_code']})
 	]
 	list_display 	= ('first_name','last_name','email',
 					'program_city', 'year_attended',
