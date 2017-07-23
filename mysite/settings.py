@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'vjk.apps.VjkConfig',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'bootstrap3'
 ]
 
 MIDDLEWARE = [
@@ -132,3 +134,8 @@ STATICFILES_DIRS = (
 
 # Redirect to home URL after login
 LOGIN_REDIRECT_URL = '/'
+
+# Django bootstrap3 settings
+BOOTSTRAP3 = {
+    'set_placeholder': False,
+}

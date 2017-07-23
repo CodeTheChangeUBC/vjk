@@ -1,0 +1,14 @@
+{% load bootstrap3 %}
+{% include 'vjk/partials/scripts.html' %}
+
+<div class='container student-form'>
+	<div class='col-sm-8 col-sm-offset-2'>
+		<form method="post">
+		    {% csrf_token %}
+		    {% bootstrap_form form %}
+		    <button type="submit" class='btn btn-primary'>
+		    	Submit
+		    </button>
+		</form>
+	</div>
+</div>
