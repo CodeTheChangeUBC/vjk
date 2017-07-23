@@ -48,9 +48,7 @@ def student_form(request):
         if form.is_valid():
             # If valid form, create student model from data
             form.save() 
-            return redirect('/')
-            messages.success(request, 'Student Created!')
-            
+            return redirect('/success')
         else:
             messages.warning(request, 'Whoops, something went wrong.')
 
@@ -58,3 +56,6 @@ def student_form(request):
         form = StudentForm()
 
     return render(request, 'vjk/studentform.html', {'form': form})
+
+def success(request):
+    return render(request, 'vjk/success.html')
