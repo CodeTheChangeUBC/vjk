@@ -70,3 +70,23 @@
 	font-variant: small-caps;
 	color: gray;
 }
+
+/* Footer */
+#container > footer > .container-fluid {
+	margin-top: 20px;
+	padding-top: 5px;
+	bottom: 0px;
+	border-top: 1px solid black;
+}
+
+#container > footer #left {
+	padding-left: 10px;
+}
+
+#container > footer #right {
+	float: right;
+	text-align: right;
+	padding-right: 10px;
+}
+
+
