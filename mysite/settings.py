@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'vjk.apps.VjkConfig',
     'django.contrib.staticfiles',
     'django_extensions',
-    'bootstrap3'
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
