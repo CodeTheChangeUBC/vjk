@@ -1,8 +1,10 @@
 /* Navigation bar */
 
-.navbar {
-	background-color: #417690;
+body > div.container-fluid > nav > div {
+	background-color: #417690;	
+	margin: 0px -16px 0 -16px;
 }
+
 .navbar-default .navbar-brand,
 .navbar-default .navbar-brand:hover {
 	color: white;
@@ -88,5 +90,12 @@
 	text-align: right;
 	padding-right: 10px;
 }
+
+/* Student intake form */
+div.container.student-form > h3 {
+	text-align: center;
+	padding: 15px 0 20px 0;
+}
+
 
 
