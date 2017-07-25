@@ -45,13 +45,12 @@ class StudentAdmin(admin.ModelAdmin):
 											'reference_address_line1','reference_address_line2', 
 											'reference_city', 'reference_province','reference_postal_code']})
 	]
-	list_display 	= ('first_name','last_name','email',
-					'program_city', 'year_attended',
-					'reference_fname', 'reference_lname')
-	list_filter 	= ['first_name']
-	search_fields 	= ['first_name','last_name','email',
-					'program_city', 'year_attended',
-					'reference_fname', 'reference_lname']
+	list_display = [f.name for f in Student._meta.get_fields()]
+	# list_display 	= ('first_name','last_name','email',
+	# 				'program_city', 'year_attended',
+	# 				'reference_fname', 'reference_lname')
+	list_filter 	= ['gender', 'aboriginal_group', 'program_city', 'year_attended', 'city']
+	search_fields 	= list_display
 
 class VolunteerAdmin(admin.ModelAdmin):
 	fieldsets = [

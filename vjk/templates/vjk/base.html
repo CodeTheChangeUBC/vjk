@@ -1,0 +1,21 @@
+<!-- Base html file for vjk site from which everything else inherits --> 
+
+<!-- Load static and scripts -->
+{% load static %}
+{% include 'vjk/partials/scripts.html' %}
+
+<html>
+<head>
+ 	<!-- Load head personal to individual page (if any)-->
+ 	{% block head %} {% endblock %}
+</head>
+<body>
+	<!-- Body -->
+	{% block body %}{% endblock %}
+
+	<!-- Footer -->
+	<div id='container'>
+	{% include 'vjk/partials/footer.html' %}
+	</div>
+</body>
+</html>

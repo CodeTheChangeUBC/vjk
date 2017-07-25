@@ -1,11 +1,13 @@
-<html>
-<head>
+{% extends 'vjk/base.html' %}
+
+
+{% block head %}
   <title>Search Page</title>
   <!-- Load Scripts  -->
   {% block scripts %} {% endblock %}
-</head>
+{% endblock %}
 
-<body>
+{% block body %}
   <div class="container-fluid">
     {% block header %} {% endblock %}
 
@@ -34,5 +36,4 @@
     </div>
 
   </div>
-</body>
-</html>
+{% endblock %}

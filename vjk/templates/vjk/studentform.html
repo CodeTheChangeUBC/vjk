@@ -1,0 +1,17 @@
+{% extends 'vjk/index.html' %}
+{% load bootstrap3 %}
+
+{% block body %}
+<div class='container student-form'>
+	<h3>Hello! Please enter your information. </h3>
+	<div class='col-sm-8 col-sm-offset-2'>
+		<form method="post">
+		    {% csrf_token %}
+		    {% bootstrap_form form %}
+		    <button type="submit" class='save btn btn-primary'>
+		    	Submit
+		    </button>
+		</form>
+	</div>
+</div>
+{% endblock %}

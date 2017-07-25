@@ -156,7 +156,7 @@ class Student(models.Model):
 	
 	bday_regex 			= RegexValidator(regex=r'^\d{2}/\d{2}/\d{4}', 
 								message='Birth date must be entered in form MM/DD/YYYY')
-	birth_date 			= models.CharField(max_length = 10, validators=[bday_regex], blank = True, null = True, verbose_name='Birth Date')
+	birth_date 			= models.CharField(max_length = 10, validators=[bday_regex], blank = True, null = True, verbose_name='Birth Date (MM/DD/YYYY)')
 	
 	aboriginal_group 	= models.CharField(max_length = 20, 
 											choices = 	{
@@ -196,10 +196,8 @@ class Student(models.Model):
 	province 			= models.CharField(max_length = 20, choices = province_choices, blank=True, null=True, verbose_name="Province")
 	postal_code 		= models.CharField(max_length=6, blank=True, null=True, verbose_name="Postal Code")
 
-	reference_fname 	= models.CharField(max_length=75,default="",
-										verbose_name="Ref. First Name")
-	reference_lname 	= models.CharField(max_length=75,default="",
-										verbose_name="Ref. Last Name")
+	reference_fname 	= models.CharField(max_length=75,default="", verbose_name="Ref. First Name")
+	reference_lname 	= models.CharField(max_length=75,default="", verbose_name="Ref. Last Name")
 	reference_email 	= models.EmailField(default="", verbose_name='Ref. E-mail')
 	reference_number 	= models.CharField(max_length = 12, validators = [phone_regex], blank=True, null=True, verbose_name="Ref. Number")
 
